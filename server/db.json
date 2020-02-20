@@ -1,0 +1,200 @@
+{
+  "products": [{
+    "id": 1,
+    "name": "Product001",
+    "cost": 10,
+    "quantity": 1000,
+    "locationId": 1,
+    "familyId": 1
+  }, {
+    "id": 2,
+    "name": "Product002",
+    "cost": 20,
+    "quantity": 2000,
+    "locationId": 1,
+    "familyId": 2
+  }, {
+    "id": 3,
+    "name": "Product003",
+    "cost": 30,
+    "quantity": 3000,
+    "locationId": 3,
+    "familyId": 2
+  }, {
+    "id": 5,
+    "name": "Невероятный Резиновый Автомобиль",
+    "description": "At incidunt cum. Est dicta architecto. Corrupti enim qui beatae in sunt omnis dicta.",
+    "price": "657.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 85290
+  }, {
+    "id": 6,
+    "name": "Лоснящийся Стальной Ремень",
+    "description": "Ea aliquam animi mollitia error. Pariatur pariatur perspiciatis necessitatibus iste magni architecto.",
+    "price": "868.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 3605
+  }, {
+    "id": 7,
+    "name": "Эргономичный Стальной Кулон",
+    "description": "Architecto saepe doloribus culpa. Natus voluptas vel. Perferendis cupiditate eaque rerum non dolor ex. Est perspiciatis eum explicabo quo voluptatum sint consectetur natus ipsam.",
+    "price": "385.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 65772
+  }, {
+    "id": 8,
+    "name": "Практчиный Стальной Компьютер",
+    "description": "Veritatis aliquam voluptatem pariatur accusamus et accusantium quidem molestias. Voluptatem suscipit est. Doloremque consequatur sed itaque et error sed voluptatem explicabo ab. Ex eius illo earum in dolor animi minima quia non.",
+    "price": "529.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 303
+  }, {
+    "id": 9,
+    "name": "Грубый Хлопковый Свитер",
+    "description": "Nesciunt aperiam atque adipisci. Quisquam harum est natus quo expedita perspiciatis aut. Odio aut voluptas magni recusandae consequatur maxime dolor numquam.",
+    "price": "124.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 52819
+  }, {
+    "id": 10,
+    "name": "Интеллектуальный Гранитный Берет",
+    "description": "Et et cum. Rem ut ut qui. Et corrupti quia delectus aut sit rerum enim aperiam.",
+    "price": "133.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 46088
+  }, {
+    "id": 11,
+    "name": "Невероятный Хлопковый Свитер",
+    "description": "Excepturi voluptatum voluptas omnis recusandae ullam repudiandae minima cumque accusamus. Explicabo quo natus.",
+    "price": "992.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 60103
+  }, {
+    "id": 12,
+    "name": "Эргономичный Пластиковый Свитер",
+    "description": "Cum nisi distinctio quo voluptatem. Vel autem eius labore aut voluptatem. Reiciendis dolore sed ipsum in praesentium provident occaecati. Officiis qui ut aut deserunt consequatur. Quod esse deleniti saepe id quas nesciunt debitis et.",
+    "price": "304.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 23853
+  }, {
+    "id": 13,
+    "name": "Маленький Деревянный Кулон",
+    "description": "In voluptatem et harum sit odit est. Vel quidem architecto qui architecto aspernatur iure veniam quas.",
+    "price": "258.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 35359
+  }, {
+    "id": 14,
+    "name": "Фантастический Гранитный Стул",
+    "description": "Libero et tenetur et fugit et consequatur aut iste. Consequatur voluptates commodi.",
+    "price": "449.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 41311
+  }, {
+    "id": 15,
+    "name": "Интеллектуальный Бетонный Стул",
+    "description": "Sequi dolore accusamus culpa sed. Tenetur ipsam et.",
+    "price": "514.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 88261
+  }, {
+    "id": 16,
+    "name": "Фантастический Гранитный Стул",
+    "description": "Sit optio vero ad eius dolorem eveniet voluptates quidem sit. Harum qui voluptatem ex sed unde quia perspiciatis cupiditate quos. Vel velit ut. Numquam temporibus numquam laborum delectus dolorem perspiciatis. Itaque ipsum modi praesentium tempora quia illo at eveniet.",
+    "price": "634.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 33494
+  }, {
+    "id": 17,
+    "name": "Практчиный Стальной Компьютер",
+    "description": "Fugit aperiam eos omnis quae at tenetur porro consequuntur. Aut ipsa occaecati. Modi facere et. Culpa voluptatem accusantium earum eos. Quas aspernatur tempore rem iusto qui unde quaerat qui.",
+    "price": "376.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 55346
+  }, {
+    "id": 18,
+    "name": "Лоснящийся Хлопковый Стол",
+    "description": "Quod optio ex id sint debitis quis dicta quia. Et dolorum et. Voluptatem error eos quia sed accusamus nam voluptatibus. Facere eius cupiditate illo est. Quod dolor cum sapiente. Autem consectetur magnam odit quisquam assumenda voluptatibus ea distinctio.",
+    "price": "291.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 33134
+  }, {
+    "id": 19,
+    "name": "Практчиный Резиновый Свитер",
+    "description": "Quia occaecati dicta occaecati explicabo eos debitis impedit accusamus. Libero minima occaecati veniam sequi nisi. Quidem ut dolores a et placeat voluptatem itaque et. Omnis rerum hic qui perferendis similique occaecati sit hic. Commodi soluta reiciendis id ex.",
+    "price": "723.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 77260
+  }, {
+    "id": 20,
+    "name": "Великолепный Деревянный Ботинок",
+    "description": "Consequatur modi et error aspernatur. Libero voluptatum amet voluptas enim consectetur.",
+    "price": "487.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 21886
+  }, {
+    "id": 21,
+    "name": "Лоснящийся Стальной Стол",
+    "description": "Ut ea cupiditate et aliquid. Rem eos rerum expedita. Repellat et numquam aut voluptate dolor quia voluptates. Vero quisquam eos ut dolorum ipsam qui sit.",
+    "price": "839.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 81398
+  }, {
+    "id": 22,
+    "name": "Грубый Гранитный Ботинок",
+    "description": "Accusamus distinctio laudantium. Consequatur consequatur error doloribus voluptatum. Qui perferendis amet et voluptas. Aut distinctio aut minus minus praesentium rem tenetur minus.",
+    "price": "784.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 56187
+  }, {
+    "id": 23,
+    "name": "Фантастический Гранитный Стул",
+    "description": "Distinctio et quasi. Id dolorum quo praesentium soluta qui et. Est vel eum cupiditate maiores accusamus minima quia ut molestias. Sunt qui quis consequatur voluptates tempora. Rerum commodi qui blanditiis eum dignissimos id quam. Facere hic nesciunt quae accusantium sapiente impedit quibusdam aliquam eveniet.",
+    "price": "820.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 89692
+  }, {
+    "id": 24,
+    "name": "Эргономичный Резиновый Ремень",
+    "description": "Qui dolores architecto neque cum optio ipsa aut ullam quidem. Rem et velit id dolor reiciendis voluptatem facere suscipit tempore. Nihil non soluta dolor porro et fugit.",
+    "price": "93.00",
+    "imageUrl": "https://source.unsplash.com/1600x900/?product",
+    "quantity": 6650
+  }],
+  "locations": [{
+    "id": 1,
+    "name": "Location001"
+  }, {
+    "id": 2,
+    "name": "Location002"
+  }, {
+    "id": 3,
+    "name": "Location003"
+  }],
+  "families": [{
+    "id": 1,
+    "name": "FM001"
+  }, {
+    "id": 2,
+    "name": "FM002"
+  }, {
+    "id": 3,
+    "name": "FM003"
+  }],
+  "transactions": [{
+    "id": 1,
+    "cost": 11,
+    "quantity": 10,
+    "productId": 1
+  }, {
+    "id": 2,
+    "cost": 12,
+    "quantity": 100,
+    "productId": 2
+  }, {
+    "id": 3,
+    "cost": 15,
+    "quantity": 101,
+    "productId": 3
+  }]
+}
