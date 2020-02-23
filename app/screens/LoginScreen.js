@@ -1,144 +1,110 @@
-import React, { Component } from 'react'
-import {
-  View,
-  StyleSheet,
-  ActivityIndicator,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  ScrollView,
-} from 'react-native';
-import {Text, Icon, Input, Button, SocialIcon} from 'react-native-elements';
+import React from 'react';
+import { StyleSheet, KeyboardAvoidingView, ActivityIndicator, Keyboard } from 'react-native';
 
-class LoginScreen extends Component {
-  static navigationOptions = {
-    headerShown: false,
+import { Button, Block, Text, Input } from '../components';
+
+import { theme } from '../constants';
+
+const VALID_EMAIL = 'kriss @kriss.com';
+const VALID_PASSWORD = '12345';
+
+export default class LoginScreen extends React.Component {
+  static navigationOptions = {};
+
+  state = {
+    email: VALID_EMAIL,
+    password: VALID_PASSWORD,
+    errors: [],
+    loading: false,
   };
 
-    render() {
-        return (
-          <KeyboardAvoidingView
-          behavior={'padding'}
-          enabled
-   >
-     <View style={styles.headerContainer}>
-   <Icon
-     name="md-fitness"
-     size={80}
-     type="ionicon"
-     color={'#7265E2'}
-   />
- </View>
+  handleLogin = () => {
+    const { navigation } = this.props;
+    const { email, password } = this.state;
+    const errors = [];
 
- 
+    Keyboard.dismiss();
 
-    <ScrollView
-            style={styles.container}
-            keyboardShouldPersistTaps="handled">
-              <View style={styles.wrapper}>
-   <Input
-     leftIcon={
-       <Icon
-         name="email-outline"
-         type="material-community"
-         color="rgba(110, 120, 170, 1)"
-         size={25}
-       />
-     }
-     placeholder="Email"
-     inputContainerStyle={styles.input}
-     placeholderTextColor="grey"
-     autoCapitalize="none"
-     autoCorrect={false}
-     keyboardType="email-address"
-     returnKeyType="next"
-   />
-   
- </View>
-<Input
-     leftIcon={
-       <Icon
-         name="lock"
-         type="simple-line-icon"
-         color="rgba(110, 120, 170, 1)"
-         size={25}
-       />
-     }
-     inputContainerStyle={styles.input}
-     placeholderTextColor="grey"
-     placeholder="Password"
-     autoCapitalize="none"
-     secureTextEntry={true}
-     autoCorrect={false}
-     keyboardType="default"
-     returnKeyType="next"
-   />
-<View style={styles.socialWrapper}>
-          <Text style={styles.signinwith}>Sign in with</Text>
-          <View style={styles.socialLogin}>
-            <SocialIcon type="facebook" light />
-            <SocialIcon type="google" light />
-            <SocialIcon type="twitter" light />
-          </View>
-          <Button
-            title="Login"
-            loading={false}
-            loadingProps={{size: 'small', color: 'white'}}
-            buttonStyle={{
-              backgroundColor: '#7265E3',
-              borderRadius: 15,
-            }}
-            titleStyle={{fontWeight: 'bold', fontSize: 23}}
-            containerStyle={{marginVertical: 10, height: 50, width: 300}}
-            onPress={() => console.log('aye')}
-            underlayColor="transparent"
-          />
-          <TouchableOpacity
-  onPress={() =>
-    this.props.navigation.navigate('ForgotPasswordScreen')
-  }>
-  <Text h5 style={{textAlign: 'center', color: 'blue'}}>
-    Forgot Password?
-  </Text>
-</TouchableOpacity>
-        </View>
-    </ScrollView>
-   </KeyboardAvoidingView>
-        )
-    }
+    this.setState({ loading: true });
+    // check with backend API or with some static data
+    setTimeout(() => {
+      if (email !== VALID_EMAIL) {
+        errors.push('email');
+      }
+
+      if (password !== VALID_PASSWORD) {
+        errors.push('password');
+      }
+
+      this.setState({ errors, loading: false });
+
+      if (!errors.length) {
+        navigation.navigate('Browse');
+      }
+    }, 2000);
+  };
+
+  render() {
+    const { navigation } = this.props;
+    const { loading, errors } = this.state;
+    const hasErrors = key => (errors.includes(key) ? styles.hasErrors : null);
+
+    return (
+      <KeyboardAvoidingView style={styles.login} behavior="padding">
+        <Block padding={[0, theme.sizes.base * 2]}>
+          <Text h1 bold>
+            Login
+          </Text>
+          <Block middle>
+            <Input
+              label="Email"
+              style={styles.input}
+              error={hasErrors('email')}
+              defaultValue={this.state.email}
+              onChangeText={text => this.setState({ email: text })}
+            />
+            <Input
+              secure
+              label="Password"
+              style={styles.input}
+              error={hasErrors('password')}
+              defaultValue={this.state.password}
+              onChangeText={text => this.setState({ password: text })}
+            />
+          </Block>
+
+          <Button gradient onPress={() => this.handleLogin()}>
+            {loading ? (
+              <ActivityIndicator size="small" color="white" />
+            ) : (
+              <Text bold white center>
+                Login
+              </Text>
+            )}
+          </Button>
+          <Button onPress={() => navigation.navigate('Forgot')}>
+            <Text gray caption center style={{ textDecorationLine: 'underline' }}>
+              Forgot your password?
+            </Text>
+          </Button>
+        </Block>
+      </KeyboardAvoidingView>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#F4F6FA',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  headerContainer: {
-    top: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 40,
-  },
-  wrapper:{
-  },
   input: {
-    borderWidth: 1,
-    borderColor: 'white',
-    borderLeftWidth: 0,
-    height: 50,
-    backgroundColor: 'white',
-    marginBottom: 20,
+    borderRadius: 0,
+    borderWidth: 0,
+    borderBottomColor: theme.colors.gray2,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
-  socialWrapper: {
-    marginTop: 10,
+  login: {
+    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
   },
-  socialLogin: {
-    flexDirection: 'row',
-    marginTop: 10,
+  hasErrors: {
+    borderBottomColor: theme.colors.accent,
   },
-})
-
-export default LoginScreen
+});

@@ -15,9 +15,12 @@
     "react-native": "0.61.5",
     "react-native-elements": "^1.2.7",
     "react-native-gesture-handler": "^1.6.0",
+    "react-native-linear-gradient": "^2.5.6",
+    "react-native-password-strength-meter": "^0.0.3",
     "react-native-reanimated": "^1.7.0",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.0.0-beta.6",
+    "react-native-svg": "^11.0.1",
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^4.1.1",
     "react-navigation-stack": "^2.1.1"
@@ -30,6 +33,7 @@
     "eslint": "^6.5.1",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
+    "prettier": "^1.19.1",
     "react-test-renderer": "16.9.0"
   },
   "jest": {
