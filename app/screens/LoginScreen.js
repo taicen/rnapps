@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, KeyboardAvoidingView, ActivityIndicator, Keyboard } from 'react-native';
-
+import { StyleSheet, KeyboardAvoidingView, ActivityIndicator, Keyboard, ScrollView, Platform } from 'react-native';
+//import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Button, Block, Text, Input } from '../components';
 
 import { theme } from '../constants';
@@ -39,7 +39,7 @@ export default class LoginScreen extends React.Component {
       this.setState({ errors, loading: false });
 
       if (!errors.length) {
-        navigation.navigate('Browse');
+        navigation.navigate('BrowseScreen');
       }
     }, 2000);
   };
@@ -50,7 +50,8 @@ export default class LoginScreen extends React.Component {
     const hasErrors = key => (errors.includes(key) ? styles.hasErrors : null);
 
     return (
-      <KeyboardAvoidingView style={styles.login} behavior="padding">
+        <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.Os == "ios" ? "padding" : "" } enabled>
         <Block padding={[0, theme.sizes.base * 2]}>
           <Text h1 bold>
             Login
@@ -71,6 +72,14 @@ export default class LoginScreen extends React.Component {
               defaultValue={this.state.password}
               onChangeText={text => this.setState({ password: text })}
             />
+            <Input
+              secure
+              label="Password"
+              style={styles.input}
+              error={hasErrors('password')}
+              defaultValue={this.state.password}
+              onChangeText={text => this.setState({ password: text })}
+            />
           </Block>
 
           <Button gradient onPress={() => this.handleLogin()}>
@@ -82,13 +91,14 @@ export default class LoginScreen extends React.Component {
               </Text>
             )}
           </Button>
-          <Button onPress={() => navigation.navigate('Forgot')}>
+          <Button onPress={() => navigation.navigate('ForgotScreen')}>
             <Text gray caption center style={{ textDecorationLine: 'underline' }}>
               Forgot your password?
             </Text>
           </Button>
         </Block>
       </KeyboardAvoidingView>
+        </ScrollView>
     );
   }
 }
@@ -101,8 +111,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   login: {
-    flex: 1,
-    justifyContent: 'center',
+    flex: 1, height: '100%'
   },
   hasErrors: {
     borderBottomColor: theme.colors.accent,

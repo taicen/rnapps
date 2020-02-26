@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, Image, Switch } from 'react-native';
+import { StyleSheet, Image, Switch, ScrollView } from 'react-native';
 import { theme, mocks } from '../constants';
 import { Button, Block, Text, Divider } from '../components';
 
 import Slider from 'react-native-slider';
 
-export default class SettingsScreen extends React.Component {
+export default class SettingScreen extends React.Component {
   state = {
     budget: 850,
     monthly: 1700,
@@ -121,7 +121,7 @@ export default class SettingsScreen extends React.Component {
   }
 }
 
-SettingsScreen.defaultProps = {
+SettingScreen.defaultProps = {
   profile: mocks.profile,
 };
 

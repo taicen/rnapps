@@ -9,7 +9,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import {theme} from '../constants';
 
-class Button extends Component {
+export default class Button extends Component {
   render() {
     const {
       style,
@@ -101,5 +101,3 @@ const styles = StyleSheet.create({
   gray3: { backgroundColor: theme.colors.gray3, },
   gray4: { backgroundColor: theme.colors.gray4, },
 });
-
-export default Button;

@@ -33,7 +33,7 @@ export default class BrowseScreen extends Component {
           <Text h1 bold>
             Browse
           </Text>
-          <Button onPress={() => navigation.navigate('Settings')}>
+          <Button onPress={() => navigation.navigate('SettingScreen')}>
             <Image source={profile.avatar} style={styles.avatar} />
           </Button>
         </Block>
@@ -48,7 +48,7 @@ export default class BrowseScreen extends Component {
             {categories.map(category => (
               <TouchableOpacity
                 key={category.name}
-                onPress={() => navigation.navigate('Explore', category)}
+                onPress={() => navigation.navigate('ExploreScreen', category)}
               >
                 <Card center middle shadow style={styles.category}>
                   <Badge margin={[0, 0, 15]} size={50} color="rgba(41,216,143,0.20)">

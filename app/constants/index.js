@@ -1,5 +1,5 @@
 import * as theme from './theme';
-import * as mocks from './mocks';
+import * as mocks from './mock';
 
 export {
   theme,

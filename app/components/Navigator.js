@@ -1,3 +1,4 @@
+import React from 'react';
 import { Image } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -23,11 +24,11 @@ const StackNavigator = createStackNavigator(
     //EmailInputScreen,
     //PasswordInputScreen,
     SignupScreen,
-    //ForgotScreen,
+    ForgotScreen,
     //ExploreScreen,
-    //BrowseScreen,
+    BrowseScreen,
     //ProductScreen,
-    //SettingScreen,
+    SettingScreen,
 
     // TouchAuthentication: TouchAuthentication,
     // onBoardScreen: {
@@ -40,7 +41,7 @@ const StackNavigator = createStackNavigator(
   }, {
     defaultNavigationOptions: {
       headerStyle: {},
-      headerBackImage: <Image source={require('../assets/icons/back.png')} />,
+      headerBackImage: () => <Image source={require('../assets/icons/back.png')} />,
       headerBackTitle: null,
       headerLeftContainerStyle: {},
       headerRightContainerStyle: {},

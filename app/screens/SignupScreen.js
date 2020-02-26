@@ -1,12 +1,12 @@
 import React from 'react';
-import { Alert, ActivityIndicator, Keyboard, KeyboardAvoidingView, StyleSheet } from 'react-native';
+import { Alert, ActivityIndicator, Keyboard, KeyboardAvoidingView, StyleSheet, ScrollView, Platform} from 'react-native';
 
 import { Button, Block, Input, Text } from '../components';
 import { theme } from '../constants';
 
 export default class Signup extends React.Component {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
 
   state = {
@@ -55,7 +55,8 @@ export default class Signup extends React.Component {
     const hasErrors = key => (errors.includes(key) ? styles.hasErrors : null);
 
     return (
-      <KeyboardAvoidingView style={styles.signup} behavior="padding">
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <KeyboardAvoidingView style={{flex: 1}} behavior={Platform.Os == "ios" ? "padding" : "" } enabled>
         <Block padding={[0, theme.sizes.base * 2]}>
           <Text h1 bold>
             Sign Up
@@ -93,7 +94,7 @@ export default class Signup extends React.Component {
                 </Text>
               )}
             </Button>
-            <Button onPress={() => navigation.navigate('Welcome ')}>
+            <Button onPress={() => navigation.navigate('IntroScreen')}>
               <Text gray caption center style={{ textDecorationLine: 'underline' }}>
                 Back to Login
               </Text>
@@ -101,6 +102,7 @@ export default class Signup extends React.Component {
           </Block>
         </Block>
       </KeyboardAvoidingView>
+      </ScrollView>
     );
   }
 }
@@ -108,6 +110,7 @@ export default class Signup extends React.Component {
 const styles = StyleSheet.create({
   signup: {
     flex: 1,
+    flexDirection: 'column',
     justifyContent: 'center',
   },
   input: {

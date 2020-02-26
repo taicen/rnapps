@@ -7,7 +7,7 @@ import { theme } from '../constants';
 
 const VALID_EMAIL = 'kriss@kriss.com';
 
-export default class Forgot extends React.Component {
+export default class ForgotScreen extends React.Component {
   state = {
     email: VALID_EMAIL,
     errors: [],
@@ -33,7 +33,7 @@ export default class Forgot extends React.Component {
           {
             text: 'OK',
             onPress: () => {
-              navigation.navigate('Login');
+              navigation.navigate('LoginScreen');
             },
           },
         ],
@@ -74,7 +74,7 @@ export default class Forgot extends React.Component {
                 </Text>
               )}
             </Button>
-            <Button onPress={() => navigation.navigate('Login')}>
+            <Button onPress={() => navigation.navigate('LoginScreen')}>
               <Text gray caption center style={{ textDecorationLine: 'underline' }}>
                 Back to Login
               </Text>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, TextInput } from 'react-native'
-import { Icon } from 'expo';
+import Icon from 'react-native-vector-icons/Ionicons';
 import Text from './Text';
 import Block from './Block';
 import Button from './Button';
@@ -28,7 +28,7 @@ export default class Input extends Component {
       >
         {
           rightLabel ? rightLabel :
-            <Icon.Ionicons
+            <Icon
               color={theme.colors.gray}
               size={theme.sizes.font * 1.35}
               name={!toggleSecure ? "md-eye" : "md-eye-off"}
