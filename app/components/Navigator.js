@@ -25,7 +25,7 @@ const StackNavigator = createStackNavigator(
     //PasswordInputScreen,
     SignupScreen,
     ForgotScreen,
-    //ExploreScreen,
+    ExploreScreen,
     BrowseScreen,
     //ProductScreen,
     SettingScreen,

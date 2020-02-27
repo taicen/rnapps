@@ -19,6 +19,7 @@
     "react-native-linear-gradient": "^2.5.6",
     "react-native-password-strength-meter": "^0.0.3",
     "react-native-reanimated": "^1.7.0",
+    "react-native-redash": "1.2.3",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.0.0-beta.6",
     "react-native-slider": "^0.11.0",
