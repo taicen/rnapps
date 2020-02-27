@@ -143,7 +143,7 @@ export class IntroScreen extends Component {
               {this.renderSteps()}
             </Block>
             <Block middle flex={0.5} margin={[0, theme.sizes.padding * 2]}>
-  <Button gradient onPress={() => this.props.navigation.navigate('ExploreScreen')}>
+  <Button gradient onPress={() => this.props.navigation.navigate('BrowseScreen')}>
     <Text center semibold white>Login</Text>
   </Button>
   <Button shadow onPress={() => this.props.navigation.navigate('SignupScreen')}>

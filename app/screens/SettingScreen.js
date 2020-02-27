@@ -3,7 +3,7 @@ import { StyleSheet, Image, Switch, ScrollView } from 'react-native';
 import { theme, mocks } from '../constants';
 import { Button, Block, Text, Divider } from '../components';
 
-import Slider from 'react-native-slider';
+import {Slider} from '@miblanchard/react-native-slider';
 
 export default class SettingScreen extends React.Component {
   state = {
