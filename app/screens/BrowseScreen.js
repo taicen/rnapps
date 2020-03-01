@@ -7,7 +7,19 @@ const { width } = Dimensions.get('window');
 export default class BrowseScreen extends Component {
   state = {
     active: 'Products',
+    categories: [],
   };
+
+  componentDidMount() {
+    this.setState({ categories: this.props.categories });
+  }
+
+  handleTab(tab) {
+    const { categories } = this.props;
+    const filtered = categories.filter(category => category.tags.includes(tab.toLowerCase()));
+
+    this.setState({ active: tab, categories: filtered });
+  }
 
   renderTab(tab) {
     const { active } = this.state;
@@ -16,7 +28,7 @@ export default class BrowseScreen extends Component {
       <TouchableOpacity
         key={`tab-${tab}`}
         style={[styles.tab, isActive ? styles.active : null]}
-        onPress={() => this.setState({ active: tab })}
+        onPress={() => this.handleTab(tab)}
       >
         <Text size={16} medium gray={!isActive} secondary={isActive}>
           {tab}
@@ -25,7 +37,8 @@ export default class BrowseScreen extends Component {
     );
   }
   render() {
-    const { profile, navigation, categories } = this.props;
+    const { profile, navigation } = this.props;
+    const { categories } = this.state;
     const tabs = ['Products', 'Inspirations', 'Shop'];
     return (
       <Block>
@@ -48,7 +61,7 @@ export default class BrowseScreen extends Component {
             {categories.map(category => (
               <TouchableOpacity
                 key={category.name}
-                onPress={() => navigation.navigate('ExploreScreen', category)}
+                onPress={() => navigation.navigate('ExploreScreen', { category })}
               >
                 <Card center middle shadow style={styles.category}>
                   <Badge margin={[0, 0, 15]} size={50} color="rgba(41,216,143,0.20)">

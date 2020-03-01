@@ -3,7 +3,8 @@ import { StyleSheet, Image, Switch, ScrollView } from 'react-native';
 import { theme, mocks } from '../constants';
 import { Button, Block, Text, Divider } from '../components';
 
-import {Slider} from '@miblanchard/react-native-slider';
+import { Slider } from '@miblanchard/react-native-slider';
+import { TextInput } from 'react-native-gesture-handler';
 
 export default class SettingScreen extends React.Component {
   state = {
@@ -11,9 +12,41 @@ export default class SettingScreen extends React.Component {
     monthly: 1700,
     notifications: true,
     newsletter: false,
+    editing: null,
+    profile: {},
   };
+  componentDidMount() {
+    this.setState({ profile: this.props.profile });
+  }
+
+  toggleEdit(name) {
+    const { editing } = this.state;
+    this.setState({ editing: !editing ? name : null });
+  }
+
+  renderEdit(name) {
+    const { profile, editing } = this.state;
+
+    if (editing === name) {
+      return (
+        <TextInput
+          defaultValue={profile[name]}
+          onChangeText={text => this.handleEdit([name], text)}
+        />
+      );
+    }
+
+    return <Text bold>{profile[name]}</Text>;
+  }
+
+  handleEdit(name, text) {
+    const { profile } = this.state;
+    profile[name] = text;
+    this.setState({ profile });
+  }
+
   render() {
-    const { profile } = this.props;
+    const { profile, editing } = this.state;
     return (
       <Block>
         <Block flex={false} row center space="between" style={styles.header}>
@@ -26,40 +59,38 @@ export default class SettingScreen extends React.Component {
         </Block>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Block style={styles.inputs}>
-            <Block row space="between">
+            <Block row space="between" margin={[10, 0]} style={styles.inputRow}>
               <Block>
                 <Text gray2 style={{ marginBottom: 10 }}>
                   Username
                 </Text>
-                <Text bold>{profile.username}</Text>
+                {this.renderEdit('username')}
               </Block>
-              <Text medium secondary>
-                Edit
+              <Text medium secondary onPress={() => this.toggleEdit('username')}>
+                {editing === 'username' ? 'Save' : 'Edit'}
               </Text>
             </Block>
-          </Block>
-          <Block row space="between" margin={[10, 0]} style={styles.inputRow}>
-            <Block>
-              <Text gray2 style={{ marginBottom: 10 }}>
-                Location
+            <Block row space="between" margin={[10, 0]} style={styles.inputRow}>
+              <Block>
+                <Text gray2 style={{ marginBottom: 10 }}>
+                  Location
+                </Text>
+                {this.renderEdit('location')}
+              </Block>
+              <Text medium secondary onPress={() => this.toggleEdit('location')}>
+                {editing === 'location' ? 'Save' : 'Edit'}
               </Text>
-              <Text bold>{profile.location}</Text>
             </Block>
-            <Text medium secondary>
-              Edit
-            </Text>
-          </Block>
-          <Block row space="between" margin={[10, 0]} style={styles.inputRow}>
-            <Block>
-              <Text gray2 style={{ marginBottom: 10 }}>
-                E-mail
-              </Text>
-              <Text bold>{profile.email}</Text>
+            <Block row space="between" margin={[10, 0]} style={styles.inputRow}>
+              <Block>
+                <Text gray2 style={{ marginBottom: 10 }}>
+                  E-mail
+                </Text>
+                <Text bold>{profile.email}</Text>
+              </Block>
             </Block>
-            <Text medium secondary>
-              Edit
-            </Text>
           </Block>
+
           <Divider margin={[theme.sizes.base, theme.sizes.base * 2]} />
           <Block style={styles.sliders}>
             <Block>
