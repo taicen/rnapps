@@ -104,7 +104,7 @@ export default class Explore extends React.Component {
     const resize = (sizes.width * 100) / fullWidth;
     const imgWidth = resize > 75 ? fullWidth : sizes.width * 1;
     return (
-      <TouchableOpacity key={`img-${index}`} onPress={() => navigation.navigate('Product')}>
+      <TouchableOpacity key={`img-${index}`} onPress={() => navigation.navigate('ProductScreen')}>
         <Image source={img} style={[styles.image, { minWidth: imgWidth, maxWidth: imgWidth }]} />
       </TouchableOpacity>
     );

@@ -27,7 +27,7 @@ const StackNavigator = createStackNavigator(
     ForgotScreen,
     ExploreScreen,
     BrowseScreen,
-    //ProductScreen,
+    ProductScreen,
     SettingScreen,
 
     // TouchAuthentication: TouchAuthentication,
@@ -38,7 +38,8 @@ const StackNavigator = createStackNavigator(
     // SetGoalScreen: SetGoalScreen,
     // CustomizeInterest: CustomizeInterest,
     // SelectGender: SelectGender,
-  }, {
+  },
+  {
     defaultNavigationOptions: {
       headerStyle: {},
       headerBackImage: () => <Image source={require('../assets/icons/back.png')} />,
@@ -46,8 +47,8 @@ const StackNavigator = createStackNavigator(
       headerLeftContainerStyle: {},
       headerRightContainerStyle: {},
     },
-    initialRouteName: 'IntroScreen'
-  }
+    initialRouteName: 'IntroScreen',
+  },
 );
 
 export default createAppContainer(StackNavigator);
