@@ -1,8 +1,10 @@
 import React from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
-import { Button, Block, Text } from '../components';
+import { StyleSheet, ScrollView, FlatList, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { Divider, Input, Button, Block, Text } from '../components';
 import { theme, mocks } from '../constants';
 import Entypo from 'react-native-vector-icons/Entypo';
+
+const { width, height } = Dimensions.get('window');
 export default class ProductScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -14,10 +16,34 @@ export default class ProductScreen extends React.Component {
     };
   };
 
+  renderGallery() {
+    const { product } = this.props;
+    return (
+      <FlatList
+        horizontal
+        pagingEnabled
+        scrollEnabled
+        showsHorizontalScrollIndicator={false}
+        snapToAlignment="center"
+        data={product.images}
+        keyExtractor={(item, index) => `${index}`}
+        renderItem={({item}) => (
+          <Image
+            source={item}
+            resizeMode="contain"
+            style={{ width, height: height / 2.8 }}
+          />
+        )}
+      />
+    );
+  }
+
   render() {
     const { product } = this.props;
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
+        {this.renderGallery()}
+
         <Block style={styles.product}>
           <Text h2 bold>
             {product.name}
@@ -32,6 +58,31 @@ export default class ProductScreen extends React.Component {
           <Text gray light height={22}>
             {product.description}
           </Text>
+          <Divider margin={[theme.sizes.padding * 0.9, 0]} />
+          <Block>
+            <Text semibold>Gallery</Text>
+            <Block row margin={[theme.sizes.padding * 0.9, 0]}>
+              {product.images.slice(1, 3).map(
+                (image, index) => (
+                  <Image
+                    key={`gallery-${index}`}
+                    source={image}
+                    style={styles.image}
+                  />
+                )
+              )}
+              <Block
+                flex={false}
+                card
+                center
+                middle
+                color="rgba(197,204,214,0.20)"
+                style={styles.more}
+              >
+                <Text gray>+{product.images.slice(3).length}</Text>
+              </Block>
+            </Block>
+          </Block>
         </Block>
       </ScrollView>
     );
@@ -55,4 +106,13 @@ const styles = StyleSheet.create({
     paddingVertical: theme.sizes.base / 2.5,
     marginRight: theme.sizes.base * 0.625,
   },
+  image: {
+    width: width / 3.26,
+    height: width / 3.26,
+    marginRight: theme.sizes.base,
+  },
+  more: {
+    width: 55,
+    height: 55,
+  }
 });
