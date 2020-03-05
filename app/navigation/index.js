@@ -1,13 +1,17 @@
 import React from 'react';
-import { Image } from 'react-native';
-import { createAppContainer } from 'react-navigation';
+import { Image, Text } from 'react-native';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import IntroScreen from '../screens/IntroScreen';
 import LoginScreen from '../screens/LoginScreen';
 import EmailInputScreen from '../screens/EmailInputScreen';
 import PasswordInputScreen from '../screens/PasswordInputScreen';
 
+import SplashScreen from '../screens/SplashScreen';
 //import Welcome from '../screens/Welcome';
 //import Login from '../screens/Login';
 import SignupScreen from '../screens/SignupScreen';
@@ -17,16 +21,23 @@ import BrowseScreen from '../screens/BrowseScreen';
 import ProductScreen from '../screens/ProductScreen';
 import SettingScreen from '../screens/SettingScreen';
 
+const HomeNavigator = createStackNavigator({
+  IntroScreen,
+  LoginScreen,
+  SignupScreen,
+  ForgotScreen,
+});
+
 const StackNavigator = createStackNavigator(
   {
-    IntroScreen,
-    LoginScreen,
+    //IntroScreen,
+    //LoginScreen,
     //EmailInputScreen,
     //PasswordInputScreen,
-    SignupScreen,
-    ForgotScreen,
-    ExploreScreen,
+    //SignupScreen,
+    //ForgotScreen,
     BrowseScreen,
+    ExploreScreen,
     ProductScreen,
     SettingScreen,
 
@@ -47,8 +58,71 @@ const StackNavigator = createStackNavigator(
       headerLeftContainerStyle: {},
       headerRightContainerStyle: {},
     },
-    initialRouteName: 'IntroScreen',
+    initialRouteName: 'BrowseScreen',
   },
 );
 
-export default createAppContainer(StackNavigator);
+const AppTabNavigator = createBottomTabNavigator(
+  {
+    Main: { 
+      screen: StackNavigator,
+      navigationOptions: {
+        tabBarLabel: ({ tintColor }) => (
+          <Text style={{ color: tintColor }}>
+            Browse
+          </Text>
+        ),
+        tabBarIcon: ({ horizontal, tintColor }) =>
+          <Icon name="home" size={horizontal ? 20 : 25} color={tintColor} />
+      }
+    },
+    Setting: {
+      screen: SettingScreen,
+      navigationOptions: {
+        tabBarLabel: ({ tintColor }) => (
+          <Text style={{ color: tintColor }}>
+            Setting
+          </Text>
+        ),
+        tabBarIcon: ({ horizontal, tintColor }) =>
+          <Icon name="cogs" size={horizontal ? 20 : 25} color={tintColor} />
+      }
+    }
+  },
+  {
+    tabBarOptions: {
+      //showLabel: false,
+      activeTintColor: 'orange',
+      inactiveTintColor: 'gray',
+      labelStyle: {
+        fontSize: 16,
+      },
+      labelPosition: 'below-icon',
+      style: {
+        backgroundColor: 'grey',
+        paddingTop: 4,
+        paddingBottom :4
+      },
+      tabStyle: {
+        backgroundColor: 'white',
+        alignItems: 'center',
+      }
+    },
+    initialRouteName: 'Main',
+    resetOnBlur: true, // сбрасывает состояние предыдущего экрана, по умолчанию false
+    //tabBarComponent: <> - Optional, override component to use as the tab bar.
+  }
+);
+
+const AppSwitchNavigator = createSwitchNavigator(
+  {
+    //Splash: SplashScreen,
+    //Auth: HomeNavigator,
+    Main: { screen: AppTabNavigator },
+  },
+  // {
+  //   initialRouteName: 'Auth'
+  // }
+);
+
+export default createAppContainer(AppSwitchNavigator);

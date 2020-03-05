@@ -6,6 +6,8 @@ var database = {
 var item = database.products.pop();
 var id = item.id;
 
+const UNSPLASH_IMG = "https://source.unsplash.com/1600x900/?product";
+
 faker.locale = "ru";
 //faker.setLocale("ru"); //default en
 
@@ -16,7 +18,7 @@ for (var i = 1; i <= 20; i++) {
     name: faker.commerce.productName(),
     description: faker.lorem.sentences(),
     price: faker.commerce.price(),
-    imageUrl: "https://source.unsplash.com/1600x900/?product",
+    imageUrl: UNSPLASH_IMG,
     quantity: faker.random.number()
   });
 }

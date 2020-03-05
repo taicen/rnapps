@@ -3,15 +3,34 @@ import { StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions } from 'rea
 import { theme, mocks } from '../constants';
 import { Button, Block, Text, Card, Badge } from '../components';
 
+import { withNavigationFocus } from 'react-navigation';
+
 const { width } = Dimensions.get('window');
-export default class BrowseScreen extends Component {
+class BrowseScreen extends Component {
   state = {
     active: 'Products',
     categories: [],
   };
 
-  componentDidMount() {
-    this.setState({ categories: this.props.categories });
+  componentDidMount(){
+    this.handleTab(this.state.active);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.isFocused !== this.props.isFocused) {
+      // Use the `this.props.isFocused` boolean
+      // Call any action
+      if(this.props.isFocused){
+        console.log('====================================');
+        console.log('FOCUSED');
+        console.log('====================================');
+      } else {
+        console.log('====================================');
+        console.log('UNFOCUSED');
+        console.log('====================================');
+      }
+      
+    }
   }
 
   handleTab(tab) {
@@ -40,13 +59,14 @@ export default class BrowseScreen extends Component {
     const { profile, navigation } = this.props;
     const { categories } = this.state;
     const tabs = ['Products', 'Inspirations', 'Shop'];
+    
     return (
       <Block>
         <Block flex={false} row center space="between" style={styles.header}>
           <Text h1 bold>
             Browse
           </Text>
-          <Button onPress={() => navigation.navigate('SettingScreen')}>
+          <Button onPress={() => navigation.navigate('Setting')}>
             <Image source={profile.avatar} style={styles.avatar} />
           </Button>
         </Block>
@@ -122,3 +142,5 @@ const styles = StyleSheet.create({
     marginBottom: theme.sizes.base * 3.5,
   },
 });
+
+export default withNavigationFocus(BrowseScreen);

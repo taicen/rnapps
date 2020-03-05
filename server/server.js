@@ -3,8 +3,12 @@ const bodyParser = require('body-parser')
 const jsonServer = require('json-server')
 const jwt = require('jsonwebtoken')
 
+const HOST = 'localhost';
+const DB_NAME = './db.json';
+const PORT = 8080;
+
 const server = jsonServer.create()
-const router = jsonServer.router('./db.json')
+const router = jsonServer.router(DB_NAME)
 const userdb = JSON.parse(fs.readFileSync('./users.json', 'UTF-8'))
 
 const prettyPrint = require('./pretty');
@@ -14,12 +18,11 @@ server.use(bodyParser.json())
 server.use(jsonServer.defaults());
 
 const SECRET_KEY = '123456789'
-
-const expiresIn = '1h'
+const EXPIRES_IN = '1h'
 
 // Create a token from a payload 
 function createToken(payload){
-  return jwt.sign(payload, SECRET_KEY, {expiresIn})
+  return jwt.sign(payload, SECRET_KEY, {EXPIRES_IN})
 }
 
 // Verify the token 
@@ -120,7 +123,7 @@ server.use(/^(?!\/auth).*$/,  (req, res, next) => {
 
 server.use(router)
 
-server.listen(8000, () => {
+server.listen(PORT, () => {
   console.log('Run Auth API Server');
-  prettyPrint({host: 'localhost', port: 8000, db: './db.json'});
+  prettyPrint({host: HOST, port: PORT, db: DB_NAME});
 })

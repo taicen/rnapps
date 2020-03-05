@@ -39,7 +39,7 @@ export default class LoginScreen extends React.Component {
       this.setState({ errors, loading: false });
 
       if (!errors.length) {
-        navigation.navigate('BrowseScreen');
+        navigation.navigate('Main');
       }
     }, 2000);
   };
@@ -63,14 +63,6 @@ export default class LoginScreen extends React.Component {
               error={hasErrors('email')}
               defaultValue={this.state.email}
               onChangeText={text => this.setState({ email: text })}
-            />
-            <Input
-              secure
-              label="Password"
-              style={styles.input}
-              error={hasErrors('password')}
-              defaultValue={this.state.password}
-              onChangeText={text => this.setState({ password: text })}
             />
             <Input
               secure

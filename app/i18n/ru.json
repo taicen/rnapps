@@ -1,0 +1,11 @@
+{
+  "appName": "Blitz Reading",
+  "navigation": {
+    "home": "Домой",
+    "highScores": "Скорость",
+    "settings": "Настройки"
+  },
+  "home": {
+    "welcome": "Привет %{appName}!"
+  }
+}
