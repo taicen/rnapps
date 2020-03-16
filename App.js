@@ -6,14 +6,14 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import Navigator from './app/navigation';
+import React, { Component } from 'react';
+import AppContainer from './app/containers/AppContainer';
 
 import { enableScreens } from 'react-native-screens';
 enableScreens();
 
 export default class App extends Component {
   render() {
-    return <Navigator />;
+    return <AppContainer />;
   }
 }
