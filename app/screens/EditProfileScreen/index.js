@@ -58,7 +58,7 @@ const gender = [
 
 class EditProfileScreen extends Component {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
   constructor(props) {
     super(props);

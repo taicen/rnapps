@@ -10,7 +10,7 @@ import { bindActionCreators } from 'redux';
 
 class LogOutModal extends Component {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
   constructor(props) {
     super(props);

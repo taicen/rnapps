@@ -47,7 +47,7 @@ const myPos = {
 };
 class RouteScreen extends Component {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
     title: 'Проложить маршрут',
     headerTitleStyle: headerNavTitleStyle,
   };

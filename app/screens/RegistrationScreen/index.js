@@ -21,7 +21,7 @@ class RegistrationScreen extends Component {
       headerStyle: {
         backgroundColor: '#ffffff',
       },
-      headerLeft: (
+      headerLeft: () => (
         <View style={{ marginLeft: 20 }}>
           <ArrowBack
             onPress={() => {

@@ -49,11 +49,17 @@ class SupportMenu extends Component {
     // this.props.getCallbackForm();
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     this.setState({
-      callbackForm: nextProps.callbackForm,
+      callbackForm: this.props.callbackForm,
     });
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState({
+  //     callbackForm: nextProps.callbackForm,
+  //   });
+  // }
 
   renderHeader = (section, _, isActive) => {
     return (

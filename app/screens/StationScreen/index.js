@@ -140,7 +140,8 @@ class StationScreen extends Component {
       });
   };
 
-  componentWillMount() {
+  // componentWillMount() {
+  componentDidMount() {
     const { getStation, navigation, getFavorites } = this.props;
     const { id, token } = navigation.state.params;
     const dataToSend = {

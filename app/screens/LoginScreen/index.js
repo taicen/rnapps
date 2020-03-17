@@ -22,7 +22,7 @@ const headerStyle = {
 
 class LoginScreen extends Component {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
 
   constructor(props) {

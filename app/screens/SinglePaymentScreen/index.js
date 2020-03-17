@@ -17,7 +17,7 @@ const data = {
 
 class SinglePaymentScreen extends Component {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
 
   backHandler = e => {

@@ -77,7 +77,7 @@ const AppStackNavigator = createStackNavigator(
   },
   {
     navigationOptions: {
-      header: null,
+      headerShown: false,
     },
     initialRouteName: 'Main',
     resetOnBlur: true,
@@ -138,7 +138,7 @@ const AppTabNavigator = createBottomTabNavigator(
   {
     tabBarComponent: props => <BottomTabs {...props} />,
     navigationOptions: {
-      header: null,
+      headerShown: false,
     },
     initialRouteName: 'Main',
   },

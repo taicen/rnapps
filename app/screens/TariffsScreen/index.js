@@ -49,7 +49,7 @@ AsyncStorage.getItem('user_token').then(tkn => {
 
 class TariffsScreen extends Component {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
   constructor(props) {
     super(props);
@@ -107,7 +107,8 @@ class TariffsScreen extends Component {
     });
   };
 
-  componentWillMount() {
+  // componentWillMount() {
+  componentDidMount() {
     const { getTariffs, profileData, getCardsInfo, user_token } = this.props;
     const dataToSend = {
       // Use test token of another user to test

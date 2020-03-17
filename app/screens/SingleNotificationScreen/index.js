@@ -17,19 +17,26 @@ const data = {
 
 class SingleNotificationScreen extends Component {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
 
   backHandler = e => {
     this.props.navigation.goBack();
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const { notifications, fetchNotifications } = this.props;
     if (!notifications) {
       fetchNotifications();
     }
   }
+
+  // componentWillMount() {
+  //   const { notifications, fetchNotifications } = this.props;
+  //   if (!notifications) {
+  //     fetchNotifications();
+  //   }
+  // }
 
   render() {
     const {

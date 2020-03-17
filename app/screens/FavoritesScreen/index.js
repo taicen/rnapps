@@ -36,7 +36,7 @@ AsyncStorage.getItem('user_token').then(tkn => {
 
 class FavoritesScreen extends Component {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
 
   _dataToken = {

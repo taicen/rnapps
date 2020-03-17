@@ -46,7 +46,7 @@ let token = '';
 
 class AllRoutesScreen extends Component {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
   constructor(props) {
     super(props);

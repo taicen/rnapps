@@ -36,7 +36,7 @@ const dropdownStyle = {
 };
 class PaymentScreen extends Component {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
 
   constructor(props) {

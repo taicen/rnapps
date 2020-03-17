@@ -14,15 +14,22 @@ import { styles } from './styles';
 
 class ProfileScreen extends Component {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const { profileData: profileDataAction, profile } = this.props;
     if (!profile.profile_data) {
       profileDataAction();
     }
   }
+
+  // componentWillMount() {
+  //   const { profileData: profileDataAction, profile } = this.props;
+  //   if (!profile.profile_data) {
+  //     profileDataAction();
+  //   }
+  // }
 
   render() {
     const {

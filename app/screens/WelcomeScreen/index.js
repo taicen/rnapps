@@ -35,7 +35,7 @@ function WelcomeScreen({ navigation, mainColor }) {
 }
 
 WelcomeScreen.navigationOptions = {
-  header: null,
+  headerShown: false,
 };
 
 export default connect(

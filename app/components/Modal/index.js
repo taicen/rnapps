@@ -29,13 +29,21 @@ class ModalComponent extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps !== this.props && nextProps.modalProps) {
+  componentDidUpdate(prevProps){
+    if (prevProps !== this.props && this.props.modalProps) {
       this.setState({
-        isModalVisible: nextProps.modalProps.open
+        isModalVisible: this.props.modalProps.open
       });
     }
   }
+  
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps !== this.props && nextProps.modalProps) {
+  //     this.setState({
+  //       isModalVisible: nextProps.modalProps.open
+  //     });
+  //   }
+  // }
 
   componentDidMount() {
     this.setState({ viewRef: findNodeHandle(this.blurRef) });

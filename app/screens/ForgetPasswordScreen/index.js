@@ -28,7 +28,7 @@ const hint =
 
 class ForgetPasswordScreen extends Component {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
   constructor(props) {
     super(props);

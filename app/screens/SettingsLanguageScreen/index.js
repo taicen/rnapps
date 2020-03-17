@@ -21,7 +21,7 @@ import { RadioGroup } from '../../components/ui';
 
 class SettingsLanguageScreen extends Component {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
 
   state = {

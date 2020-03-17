@@ -40,7 +40,7 @@ const dropdownStyle = {
 
 class DropdownMenuLayout extends Component {
   static navigationOptions = {
-    header: null
+    headerShown: false,
   };
 
   constructor(props) {

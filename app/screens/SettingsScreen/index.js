@@ -14,7 +14,7 @@ import { Style } from './styles';
 
 class SettingsScreen extends Component {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
   constructor(props) {
     super(props);

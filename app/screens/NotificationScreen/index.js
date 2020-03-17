@@ -37,7 +37,7 @@ const date = [
 
 class NotificationScreen extends Component {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
 
   constructor(props) {

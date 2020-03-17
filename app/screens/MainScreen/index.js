@@ -25,7 +25,7 @@ import { ShowList } from '../../components/blocks/SearchBlock/partials/ShowList'
 
 class MainScreen extends Component {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
 
   constructor(props) {
@@ -38,18 +38,18 @@ class MainScreen extends Component {
     };
   }
 
-  componentWillMount() {
-    const { fetchStations, getCallbackForm } = this.props;
+  // componentDidMount() {
+  //   const { fetchStations, getCallbackForm } = this.props;
 
-    fetchStations();
-    getCallbackForm();
+  //   fetchStations();
+  //   getCallbackForm();
 
     // OneSignal.init('a610fa20-489b-4e40-9292-dd5db0d9559f');
 
     // OneSignal.addEventListener('received', this.onReceived);
     // OneSignal.addEventListener('opened', this.onOpened);
     // OneSignal.addEventListener('ids', this.onIds);
-  }
+  // }
 
   componentWillUnmount() {
     // OneSignal.removeEventListener('received', this.onReceived);
@@ -66,7 +66,16 @@ class MainScreen extends Component {
   }
 
   async componentDidMount() {
-    const { setTheme, mainColor, fetchStatusNotifications, fetchStatusRoad } = this.props;
+    const { setTheme, mainColor, fetchStatusNotifications, fetchStatusRoad, fetchStations, getCallbackForm } = this.props;
+
+    fetchStations();
+    getCallbackForm();
+
+    // OneSignal.init('a610fa20-489b-4e40-9292-dd5db0d9559f');
+
+    // OneSignal.addEventListener('received', this.onReceived);
+    // OneSignal.addEventListener('opened', this.onOpened);
+    // OneSignal.addEventListener('ids', this.onIds);
 
     if (mainColor === '') {
       let setMainColor = '';
