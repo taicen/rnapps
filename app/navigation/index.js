@@ -1,128 +1,210 @@
 import React from 'react';
-import { Image, Text } from 'react-native';
+//import { Image, Text } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { BottomTabs } from '../components/blocks';
+//import ArrowBack from '../svg/ArrowBackIcon';
 
-import IntroScreen from '../screens/IntroScreen';
-import LoginScreen from '../screens/LoginScreen';
-import EmailInputScreen from '../screens/EmailInputScreen';
-import PasswordInputScreen from '../screens/PasswordInputScreen';
+import {
+  FavoritesScreen,
+  TariffsScreen,
+  WelcomeScreen,
+  // ForgetPasswordScreen,
+  ProfileScreen,
+  RouteScreen,
+  SettingsScreen,
+  SettingsLanguageScreen,
+  SettingsCityScreen,
+  AllRoutesScreen,
+  InitialCity,
+  MakePay,
+} from '../screens';
 
-import SplashScreen from '../screens/SplashScreen';
-//import Welcome from '../screens/Welcome';
-//import Login from '../screens/Login';
-import SignupScreen from '../screens/SignupScreen';
-import ForgotScreen from '../screens/ForgotScreen';
-import ExploreScreen from '../screens/ExploreScreen';
-import BrowseScreen from '../screens/BrowseScreen';
-import ProductScreen from '../screens/ProductScreen';
-import SettingScreen from '../screens/SettingScreen';
+import {
+  MainScreenContainer,
+  StationScreenContainer,
+  RegistrationScreenContainer,
+  LoginScreenContainer,
+  EditProfileContainer,
+  ForgetPasswordContainer,
+  NotificationsScreenContainer,
+  SingleNotificationScreenContainer,
+  SinglePaymentScreenContainer,
+  PaymentsScreenContainer,
+} from '../containers';
 
-const HomeNavigator = createStackNavigator({
-  IntroScreen,
-  LoginScreen,
-  SignupScreen,
-  ForgotScreen,
-});
+//import Icon from 'react-native-vector-icons/FontAwesome';
 
-const StackNavigator = createStackNavigator(
+//import SplashScreen from '../screens/SplashScreen';
+
+const LoginNavigator = createStackNavigator(
   {
-    //IntroScreen,
-    //LoginScreen,
-    //EmailInputScreen,
-    //PasswordInputScreen,
-    //SignupScreen,
-    //ForgotScreen,
-    BrowseScreen,
-    ExploreScreen,
-    ProductScreen,
-    SettingScreen,
-
-    // TouchAuthentication: TouchAuthentication,
-    // onBoardScreen: {
-    //   screen: onBoardScreen,
-    // },
-    // SelectProfileScreen: SelectProfileScreen,
-    // SetGoalScreen: SetGoalScreen,
-    // CustomizeInterest: CustomizeInterest,
-    // SelectGender: SelectGender,
+    Initial: InitialCity,
+    Welcome: WelcomeScreen,
+    Login: LoginScreenContainer,
+    Registration: RegistrationScreenContainer,
+    ForgetPassword: ForgetPasswordContainer,
   },
   {
     defaultNavigationOptions: {
-      headerStyle: {},
-      headerBackImage: () => <Image source={require('../assets/icons/back.png')} />,
+      //headerBackImage: <ArrowBack style={{ margin: 10 }} />,
       headerBackTitle: null,
-      headerLeftContainerStyle: {},
-      headerRightContainerStyle: {},
+      headerStyle: {
+        borderBottomWidth: 0,
+      },
     },
-    initialRouteName: 'BrowseScreen',
+    initialRouteName: 'Initial',
   },
 );
 
-const AppTabNavigator = createBottomTabNavigator(
+const AppStackNavigator = createStackNavigator(
   {
-    Main: { 
-      screen: StackNavigator,
-      navigationOptions: {
-        tabBarLabel: ({ tintColor }) => (
-          <Text style={{ color: tintColor }}>
-            Browse
-          </Text>
-        ),
-        tabBarIcon: ({ horizontal, tintColor }) =>
-          <Icon name="home" size={horizontal ? 20 : 25} color={tintColor} />
-      }
-    },
-    Setting: {
-      screen: SettingScreen,
-      navigationOptions: {
-        tabBarLabel: ({ tintColor }) => (
-          <Text style={{ color: tintColor }}>
-            Setting
-          </Text>
-        ),
-        tabBarIcon: ({ horizontal, tintColor }) =>
-          <Icon name="cogs" size={horizontal ? 20 : 25} color={tintColor} />
-      }
-    }
+    Main: MainScreenContainer,
+    //// Station: StationScreenContainer,
+    // Profile: ProfileScreen,
+    // EditProfile: EditProfileContainer,
+    //// Route: RouteScreen,
+    // AllRoutes: AllRoutesScreen,
+    // Notification: NotificationsScreenContainer,
+    // SingleNotification: SingleNotificationScreenContainer,
+    // SinglePayment: SinglePaymentScreenContainer,
+    // Settings: SettingsScreen,
+    // SettingsLanguage: SettingsLanguageScreen,
+    // SettingsCity: SettingsCityScreen,
+    // Payment: PaymentsScreenContainer,
   },
   {
-    tabBarOptions: {
-      //showLabel: false,
-      activeTintColor: 'orange',
-      inactiveTintColor: 'gray',
-      labelStyle: {
-        fontSize: 16,
-      },
-      labelPosition: 'below-icon',
-      style: {
-        backgroundColor: 'grey',
-        paddingTop: 4,
-        paddingBottom :4
-      },
-      tabStyle: {
-        backgroundColor: 'white',
-        alignItems: 'center',
-      }
+    navigationOptions: {
+      header: null,
     },
     initialRouteName: 'Main',
-    resetOnBlur: true, // сбрасывает состояние предыдущего экрана, по умолчанию false
-    //tabBarComponent: <> - Optional, override component to use as the tab bar.
-  }
+    resetOnBlur: true,
+  },
 );
+
+// const HomeNavigator = createStackNavigator({
+//   IntroScreen,
+//   LoginScreen,
+//   SignupScreen,
+//   ForgotScreen,
+// });
+
+// const StackNavigator = createStackNavigator(
+//   {
+//     //IntroScreen,
+//     //LoginScreen,
+//     //EmailInputScreen,
+//     //PasswordInputScreen,
+//     //SignupScreen,
+//     //ForgotScreen,
+//     BrowseScreen,
+//     ExploreScreen,
+//     ProductScreen,
+//     SettingScreen,
+
+//     // TouchAuthentication: TouchAuthentication,
+//     // onBoardScreen: {
+//     //   screen: onBoardScreen,
+//     // },
+//     // SelectProfileScreen: SelectProfileScreen,
+//     // SetGoalScreen: SetGoalScreen,
+//     // CustomizeInterest: CustomizeInterest,
+//     // SelectGender: SelectGender,
+//   },
+//   {
+//     defaultNavigationOptions: {
+//       headerStyle: {},
+//       headerBackImage: () => <Image source={require('../assets/icons/back.png')} />,
+//       headerBackTitle: null,
+//       headerLeftContainerStyle: {},
+//       headerRightContainerStyle: {},
+//     },
+//     initialRouteName: 'BrowseScreen',
+//   },
+// );
+
+const AppTabNavigator = createBottomTabNavigator(
+  {
+    Main: MainScreenContainer,
+    Tariffs: TariffsScreen,
+    Favorites: FavoritesScreen,
+    MakePay: MakePay,
+    Station: StationScreenContainer,
+    Route: RouteScreen,
+    AppStackNavigator,
+  },
+  {
+    tabBarComponent: props => <BottomTabs {...props} />,
+    navigationOptions: {
+      header: null,
+    },
+    initialRouteName: 'Main',
+  },
+);
+
+// const AppTabNavigator = createBottomTabNavigator(
+//   {
+//     Main: {
+//       screen: StackNavigator,
+//       navigationOptions: {
+//         tabBarLabel: ({ tintColor }) => (
+//           <Text style={{ color: tintColor }}>
+//             Browse
+//           </Text>
+//         ),
+//         tabBarIcon: ({ horizontal, tintColor }) =>
+//           <Icon name="home" size={horizontal ? 20 : 25} color={tintColor} />
+//       }
+//     },
+//     Setting: {
+//       screen: SettingScreen,
+//       navigationOptions: {
+//         tabBarLabel: ({ tintColor }) => (
+//           <Text style={{ color: tintColor }}>
+//             Setting
+//           </Text>
+//         ),
+//         tabBarIcon: ({ horizontal, tintColor }) =>
+//           <Icon name="cogs" size={horizontal ? 20 : 25} color={tintColor} />
+//       }
+//     }
+//   },
+//   {
+//     tabBarOptions: {
+//       //showLabel: false,
+//       activeTintColor: 'orange',
+//       inactiveTintColor: 'gray',
+//       labelStyle: {
+//         fontSize: 16,
+//       },
+//       labelPosition: 'below-icon',
+//       style: {
+//         backgroundColor: 'grey',
+//         paddingTop: 4,
+//         paddingBottom :4
+//       },
+//       tabStyle: {
+//         backgroundColor: 'white',
+//         alignItems: 'center',
+//       }
+//     },
+//     initialRouteName: 'Main',
+//     resetOnBlur: true, // сбрасывает состояние предыдущего экрана, по умолчанию false
+//     //tabBarComponent: <> - Optional, override component to use as the tab bar.
+//   }
+// );
 
 const AppSwitchNavigator = createSwitchNavigator(
   {
     //Splash: SplashScreen,
-    //Auth: HomeNavigator,
+    Auth: LoginNavigator,
     Main: { screen: AppTabNavigator },
   },
-  // {
-  //   initialRouteName: 'Auth'
-  // }
+  {
+    initialRouteName: 'Auth',
+  },
 );
 
 export default createAppContainer(AppSwitchNavigator);
