@@ -50,9 +50,11 @@ class SupportMenu extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    this.setState({
-      callbackForm: this.props.callbackForm,
-    });
+    if (this.props.callbackForm !== prevProps.callbackForm) {
+      this.setState({
+        callbackForm: this.props.callbackForm,
+      });
+    }
   }
 
   // componentWillReceiveProps(nextProps) {

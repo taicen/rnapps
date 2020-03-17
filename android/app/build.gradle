@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 import com.android.build.OutputFile
 
 /**
@@ -125,6 +125,9 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
+    // make sure to use 23.0.3 or greater
+    buildToolsVersion '28.0.3'
+
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     compileOptions {
@@ -138,6 +141,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        renderscriptTargetApi 28
+        renderscriptSupportModeEnabled true
     }
     splits {
         abi {

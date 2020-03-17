@@ -49,6 +49,8 @@ target 'fitness_app' do
   pod 'GoogleMaps'
   pod 'Google-Maps-iOS-Utils', '~> 3.0.2'
 
+
+
   target 'fitness_appTests' do
     inherit! :search_paths
     # Pods for testing
