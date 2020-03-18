@@ -37,7 +37,7 @@ import {
 
 //import Icon from 'react-native-vector-icons/FontAwesome';
 
-//import SplashScreen from '../screens/SplashScreen';
+import SplashScreen from '../screens/SplashScreen';
 
 const LoginNavigator = createStackNavigator(
   {
@@ -63,17 +63,17 @@ const AppStackNavigator = createStackNavigator(
   {
     Main: MainScreenContainer,
     //// Station: StationScreenContainer,
-    // Profile: ProfileScreen,
-    // EditProfile: EditProfileContainer,
+    Profile: ProfileScreen,
+    EditProfile: EditProfileContainer,
     //// Route: RouteScreen,
-    // AllRoutes: AllRoutesScreen,
-    // Notification: NotificationsScreenContainer,
-    // SingleNotification: SingleNotificationScreenContainer,
-    // SinglePayment: SinglePaymentScreenContainer,
-    // Settings: SettingsScreen,
-    // SettingsLanguage: SettingsLanguageScreen,
-    // SettingsCity: SettingsCityScreen,
-    // Payment: PaymentsScreenContainer,
+    AllRoutes: AllRoutesScreen,
+    Notification: NotificationsScreenContainer,
+    SingleNotification: SingleNotificationScreenContainer,
+    SinglePayment: SinglePaymentScreenContainer,
+    Settings: SettingsScreen,
+    SettingsLanguage: SettingsLanguageScreen,
+    SettingsCity: SettingsCityScreen,
+    Payment: PaymentsScreenContainer,
   },
   {
     navigationOptions: {

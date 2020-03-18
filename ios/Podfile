@@ -1,12 +1,6 @@
 platform :ios, '9.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
-
 use_frameworks!
-
-pre_install do |installer|
-  def installer.verify_no_static_framework_transitive_dependencies; end
-end
-
 target 'fitness_app' do
   # Pods for fitness_app
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
@@ -41,15 +35,10 @@ target 'fitness_app' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   # React Native Maps dependencies
-  
+  pod 'GoogleMaps', '3.7.0'
+  pod 'Google-Maps-iOS-Utils', '3.0.1'
+
   pod 'RNInputMask', :path => '../node_modules/react-native-text-input-mask/ios/InputMask'
-  #rn_maps_path = '../node_modules/react-native-maps'
-  #pod 'react-native-maps', :path => rn_maps_path
-  #pod 'react-native-google-maps', :path => rn_maps_path
-  pod 'GoogleMaps'
-  pod 'Google-Maps-iOS-Utils', '~> 3.0.2'
-
-
 
   target 'fitness_appTests' do
     inherit! :search_paths
@@ -57,4 +46,14 @@ target 'fitness_app' do
   end
 
   use_native_modules!
+end
+
+target 'fitness_app-tvOS' do
+  # Pods for fitness_app-tvOS
+
+  target 'fitness_app-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
 end

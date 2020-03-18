@@ -21,26 +21,26 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - Google-Maps-iOS-Utils (3.0.2):
-    - Google-Maps-iOS-Utils/Clustering (= 3.0.2)
-    - Google-Maps-iOS-Utils/Geometry (= 3.0.2)
-    - Google-Maps-iOS-Utils/Heatmap (= 3.0.2)
-    - Google-Maps-iOS-Utils/QuadTree (= 3.0.2)
-    - GoogleMaps
-  - Google-Maps-iOS-Utils/Clustering (3.0.2):
+  - Google-Maps-iOS-Utils (3.0.1):
+    - Google-Maps-iOS-Utils/Clustering (= 3.0.1)
+    - Google-Maps-iOS-Utils/Geometry (= 3.0.1)
+    - Google-Maps-iOS-Utils/Heatmap (= 3.0.1)
+    - Google-Maps-iOS-Utils/QuadTree (= 3.0.1)
+    - GoogleMaps (~> 3.7.0)
+  - Google-Maps-iOS-Utils/Clustering (3.0.1):
     - Google-Maps-iOS-Utils/QuadTree
-    - GoogleMaps
-  - Google-Maps-iOS-Utils/Geometry (3.0.2):
-    - GoogleMaps
-  - Google-Maps-iOS-Utils/Heatmap (3.0.2):
+    - GoogleMaps (~> 3.7.0)
+  - Google-Maps-iOS-Utils/Geometry (3.0.1):
+    - GoogleMaps (~> 3.7.0)
+  - Google-Maps-iOS-Utils/Heatmap (3.0.1):
     - Google-Maps-iOS-Utils/QuadTree
-    - GoogleMaps
-  - Google-Maps-iOS-Utils/QuadTree (3.0.2):
-    - GoogleMaps
-  - GoogleMaps (3.5.0):
-    - GoogleMaps/Maps (= 3.5.0)
-  - GoogleMaps/Base (3.5.0)
-  - GoogleMaps/Maps (3.5.0):
+    - GoogleMaps (~> 3.7.0)
+  - Google-Maps-iOS-Utils/QuadTree (3.0.1):
+    - GoogleMaps (~> 3.7.0)
+  - GoogleMaps (3.7.0):
+    - GoogleMaps/Maps (= 3.7.0)
+  - GoogleMaps/Base (3.7.0)
+  - GoogleMaps/Maps (3.7.0):
     - GoogleMaps/Base
   - RCTRequired (0.61.5)
   - RCTTypeSafety (0.61.5):
@@ -211,7 +211,7 @@ PODS:
     - React
   - react-native-image-picker (2.3.1):
     - React
-  - react-native-maps (0.27.0):
+  - react-native-maps (0.26.1):
     - React
   - react-native-safe-area-context (0.7.3):
     - React
@@ -272,8 +272,6 @@ PODS:
     - React
   - RNVectorIcons (6.6.0):
     - React
-  - SajjadBlurOverlay (1.0.0):
-    - React
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -283,8 +281,8 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - Google-Maps-iOS-Utils (~> 3.0.2)
-  - GoogleMaps
+  - Google-Maps-iOS-Utils (= 3.0.1)
+  - GoogleMaps (= 3.7.0)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -323,7 +321,6 @@ DEPENDENCIES:
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
-  - SajjadBlurOverlay (from `../node_modules/react-native-blur-overlay/ios`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -415,8 +412,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
-  SajjadBlurOverlay:
-    :path: "../node_modules/react-native-blur-overlay/ios"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -428,8 +423,8 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 118d0d177724c2d67f08a59136eb29ef5943ec75
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
-  Google-Maps-iOS-Utils: bfc24e492f3a88a2dffec1b6e0a5bd86fc49486f
-  GoogleMaps: 32ca02de09de357a10ac773f2c70f1986751392d
+  Google-Maps-iOS-Utils: a2b9036e783ea6d323b29b27e3109b4b90425f0d
+  GoogleMaps: 55da829c68aa931f3ae982b9e341cc2f3d89c587
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
   React: b6a59ef847b2b40bb6e0180a97d0ca716969ac78
@@ -442,7 +437,7 @@ SPEC CHECKSUMS:
   react-native-blur: cad4d93b364f91e7b7931b3fa935455487e5c33c
   react-native-config: f2c2ae45625a068c35681a16b9bfb1ca58b0adc7
   react-native-image-picker: 6a850c41f57f0848d918c2a77aedd7aa272ffa30
-  react-native-maps: 6e1cf14d0aabefe59966da6dad7cb662251d3d83
+  react-native-maps: 6e499eee4eabf422ba8b6f94e993cc768bf35153
   react-native-safe-area-context: e200d4433aba6b7e60b52da5f37af11f7a0b0392
   react-native-text-input-mask: 07227297075f9653315f43b0424d596423a01736
   react-native-webview: 1db33907230d0eb344964d6f3bb56b9ee77e25a4
@@ -465,9 +460,8 @@ SPEC CHECKSUMS:
   RNScreens: 03bf608b92ac0acf323f47d8f5b63a8f829340c8
   RNSVG: 67f1f12dae2cef6ed59a42cae74a6b8f5a9e7b46
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
-  SajjadBlurOverlay: 4366a3417954b7d4a8a70682e0c43959ff76a3cb
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: 161695cb4c1724ca3a2206bdc7f8890a71c0251c
+PODFILE CHECKSUM: 33e5be61c2894fb584d10f14c14b503d5145cbd7
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1

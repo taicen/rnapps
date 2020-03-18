@@ -65,7 +65,8 @@ class SupportSubMenu extends Component {
     const isSelected = this.state.selectedItem === index;
     // const color = isSelected ? theme.PRIMARY_COLOR : null
     const color = isSelected ? mainColor : null;
-
+    
+    
     return (
       <View>
         <TouchableOpacity
@@ -100,10 +101,10 @@ class SupportSubMenu extends Component {
       support: { callback_sended },
       common: { resultMessage, appInProgress }
     } = this.props;
-
+    console.log('>>>>>> DATA', data);
     return (
-      <View>
-        <FlatList
+      <View style={ modalStyles.subMenuContainer }>
+        {/* <FlatList
           data={data}
           inProgress={appInProgress}
           success={callback_sended}
@@ -112,7 +113,17 @@ class SupportSubMenu extends Component {
           keyExtractor={(item, index) => index.toString()}
           renderItem={this._renderItem}
           message={resultMessage}
-        />
+        /> */}
+        {
+          data.map((item, index) => {
+            
+            return(
+              <View key={ index.toString() }>
+                { this._renderItem({item, index}) }
+              </View>
+            )
+          })
+        }
       </View>
     );
   }
