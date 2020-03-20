@@ -44,11 +44,11 @@ class MainScreen extends Component {
   //   fetchStations();
   //   getCallbackForm();
 
-    // OneSignal.init('a610fa20-489b-4e40-9292-dd5db0d9559f');
+  // OneSignal.init('a610fa20-489b-4e40-9292-dd5db0d9559f');
 
-    // OneSignal.addEventListener('received', this.onReceived);
-    // OneSignal.addEventListener('opened', this.onOpened);
-    // OneSignal.addEventListener('ids', this.onIds);
+  // OneSignal.addEventListener('received', this.onReceived);
+  // OneSignal.addEventListener('opened', this.onOpened);
+  // OneSignal.addEventListener('ids', this.onIds);
   // }
 
   componentWillUnmount() {
@@ -66,7 +66,14 @@ class MainScreen extends Component {
   }
 
   async componentDidMount() {
-    const { setTheme, mainColor, fetchStatusNotifications, fetchStatusRoad, fetchStations, getCallbackForm } = this.props;
+    const {
+      setTheme,
+      mainColor,
+      fetchStatusNotifications,
+      fetchStatusRoad,
+      fetchStations,
+      getCallbackForm,
+    } = this.props;
 
     fetchStations();
     getCallbackForm();

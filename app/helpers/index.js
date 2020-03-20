@@ -7,8 +7,8 @@ export const watchPosition = store => {
     store.dispatch(
       setLocation({
         latitude: coords.latitude,
-        longitude: coords.longitude
-      })
+        longitude: coords.longitude,
+      }),
     );
   });
   return id;
@@ -24,13 +24,13 @@ export const getCurrentPosition = store => {
       store.dispatch(
         setLocation({
           latitude: coords.latitude,
-          longitude: coords.longitude
-        })
+          longitude: coords.longitude,
+        }),
       );
     },
     errors => {
       alert('Включите геолокацию!');
-    }
+    },
   );
 };
 
@@ -60,7 +60,7 @@ export const centerBetweenCoordinates = coords => {
 
   return {
     latitude: (centralLatitude * 180) / Math.PI,
-    longitude: (centralLongitude * 180) / Math.PI
+    longitude: (centralLongitude * 180) / Math.PI,
   };
 };
 
@@ -91,7 +91,7 @@ export const getCluster = (places, region) => {
   const cluster = new Supercluster({
     radius: 120,
     maxZoom: 15,
-    nodeSize: 64
+    nodeSize: 64,
   });
   let markers = [];
   try {
@@ -102,16 +102,16 @@ export const getCluster = (places, region) => {
         region.longitude - region.longitudeDelta * (0.5 + padding),
         region.latitude - region.latitudeDelta * (0.5 + padding),
         region.longitude + region.longitudeDelta * (0.5 + padding),
-        region.latitude + region.latitudeDelta * (0.5 + padding)
+        region.latitude + region.latitudeDelta * (0.5 + padding),
       ],
-      getZoomLevel(region.longitudeDelta)
+      getZoomLevel(region.longitudeDelta),
     );
   } catch (e) {
-    console.debug('failed to create cluster', e);
+    console.log('failed to create cluster', e);
   }
   return {
     markers,
-    cluster
+    cluster,
   };
 };
 
@@ -135,7 +135,7 @@ export const stationListBuilder = list => {
   const res = list.reduce((out, station) => {
     if (station && station.lat && station.lng) {
       const geometry = {
-        coordinates: [parseFloat(station.lng), parseFloat(station.lat)]
+        coordinates: [parseFloat(station.lng), parseFloat(station.lat)],
       };
       const coordinates = [parseFloat(station.lng), parseFloat(station.lat)];
       const is_active = !parseInt(station.is_not_active, 10);
@@ -144,12 +144,12 @@ export const stationListBuilder = list => {
         name: {
           ru: station.name_ru,
           kz: station.name_kz,
-          en: station.name_en
+          en: station.name_en,
         },
         address: {
           ru: station.address_ru,
           kz: station.address_kz,
-          en: station.address_en
+          en: station.address_en,
         },
         coordinates,
         geometry,
@@ -157,13 +157,11 @@ export const stationListBuilder = list => {
         is_hidden: parseInt(station.is_hidden, 10),
         is_active,
         is_sales: parseInt(station.is_sales, 10),
-        code: station.code
+        code: station.code,
       });
     }
     return out;
   }, []);
-
-  // console.log(res);
 
   return res;
 };
@@ -177,34 +175,34 @@ export const stationBuilder = station => {
     code: station.code,
     location: {
       latitude: parseFloat(station.lat),
-      longitude: parseFloat(station.lng)
+      longitude: parseFloat(station.lng),
     },
     avl_bikes: {
       ru: `${avl_bikes} велосипед${plural(avl_bikes, ['', 'а', 'ов'])}`,
       kz: `${avl_bikes} велосипед${plural(avl_bikes, ['', 'тер', 'тер'])}`,
-      en: `${avl_bikes} bicycle${plural(avl_bikes, ['', 's', 's'])}`
+      en: `${avl_bikes} bicycle${plural(avl_bikes, ['', 's', 's'])}`,
     },
     free_slots: {
       ru: `${free_slots} слот${plural(free_slots, ['', 'а', 'ов'])}`,
       kz: `${free_slots} слот${plural(free_slots, ['', 'тер', 'тер'])}`,
-      en: `${free_slots} slot${plural(free_slots, ['', 's', 's'])}`
+      en: `${free_slots} slot${plural(free_slots, ['', 's', 's'])}`,
     },
     total_slots: parseInt(station.total_slots, 10),
     name: {
       ru: station.name_ru,
       kz: station.name_kz,
-      en: station.name_en
+      en: station.name_en,
     },
     desc: {
       ru: station.desc_ru,
       kz: station.desc_kz,
-      en: station.desc_en
+      en: station.desc_en,
     },
     address: {
       ru: station.address_ru,
       kz: station.address_kz,
-      en: station.address_en
-    }
+      en: station.address_en,
+    },
   };
 };
 
@@ -212,7 +210,7 @@ export const formBuilder = params => {
   const formData = new FormData();
   Object.entries({
     tokenApi: Config.TOKEN_API_ALM,
-    ...params
+    ...params,
   }).forEach(item => {
     formData.append(item[0], item[1]);
   });

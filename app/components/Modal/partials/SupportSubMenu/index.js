@@ -19,7 +19,7 @@ class SupportSubMenu extends Component {
       selectedItem: 0,
       activeSections: this.props.activeSections,
       activeSubtype: null,
-      item: ''
+      item: '',
     };
   }
 
@@ -30,7 +30,7 @@ class SupportSubMenu extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.activeSections !== prevProps.activeSections) {
       this.setState({
-        activeSections: this.props.activeSections
+        activeSections: this.props.activeSections,
       });
     }
     if (this.props.common.resultMessage !== prevProps.common.resultMessage) {
@@ -60,13 +60,12 @@ class SupportSubMenu extends Component {
       handleSubmit,
       mainColor,
       support: { callback_sended },
-      common: { resultMessage, appInProgress }
+      common: { resultMessage, appInProgress },
     } = this.props;
     const isSelected = this.state.selectedItem === index;
     // const color = isSelected ? theme.PRIMARY_COLOR : null
     const color = isSelected ? mainColor : null;
-    
-    
+
     return (
       <View>
         <TouchableOpacity
@@ -99,11 +98,10 @@ class SupportSubMenu extends Component {
     const {
       data,
       support: { callback_sended },
-      common: { resultMessage, appInProgress }
+      common: { resultMessage, appInProgress },
     } = this.props;
-    console.log('>>>>>> DATA', data);
     return (
-      <View style={ modalStyles.subMenuContainer }>
+      <View style={modalStyles.subMenuContainer}>
         {/* <FlatList
           data={data}
           inProgress={appInProgress}
@@ -114,16 +112,9 @@ class SupportSubMenu extends Component {
           renderItem={this._renderItem}
           message={resultMessage}
         /> */}
-        {
-          data.map((item, index) => {
-            
-            return(
-              <View key={ index.toString() }>
-                { this._renderItem({item, index}) }
-              </View>
-            )
-          })
-        }
+        {data.map((item, index) => {
+          return <View key={index.toString()}>{this._renderItem({ item, index })}</View>;
+        })}
       </View>
     );
   }
@@ -131,20 +122,20 @@ class SupportSubMenu extends Component {
 
 const mapDispatchToProps = dispatch => ({
   sendCallback: (type, subtype, message) => dispatch(sendCallback(type, subtype, message)),
-  hideMessage: () => dispatch(hideMessage())
+  hideMessage: () => dispatch(hideMessage()),
 });
 
 const mapStateToProps = state => ({
   support: state.support,
   common: state.common,
-  mainColor: state.themeChanger.main_color
+  mainColor: state.themeChanger.main_color,
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(
   reduxForm({
-    form: 'support'
-  })(SupportSubMenu)
+    form: 'support',
+  })(SupportSubMenu),
 );

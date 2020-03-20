@@ -135,7 +135,6 @@ class EditProfileScreen extends Component {
     const { language, sourceToPass, docSourceFrontToPass, docSourceBackToPass } = this.state;
     const [first_name, last_name] = profile.name.split(' ');
     //const passed = !approved && moderation;
-
     // const smallData = {
     //   ...profile,
     //   photo_1: sourceToPass ? sourceToPass : photos.photo_1,
@@ -144,17 +143,25 @@ class EditProfileScreen extends Component {
     //   about_me: values.about_me ? values.about_me : profile.about_me
     // };
     const data = {
-      photo_1: sourceToPass ? sourceToPass : photos.photo_1,
-      iin: values.iin ? values.iin : profile.iin,
+      //iin: values.iin ? values.iin : profile.iin,
+      //phone_number: values.phone_number ? values.phone_number : profile.phone_number,
+      email: values.email ? values.email : profile.email,
       first_name: values.first_name ? values.first_name : first_name,
       last_name: values.last_name ? values.last_name : last_name,
-      email: values.email ? values.email : profile.email,
-      phone_number: values.phone_number ? values.phone_number : profile.phone_number,
-      photo_2: docSourceFrontToPass ? docSourceFrontToPass : photos.photo_2,
-      photo_3: docSourceBackToPass ? docSourceBackToPass : photos.photo_3,
+
+      photo_1: sourceToPass ? sourceToPass : photos.photo_1,
+      photo_2: docSourceFrontToPass ? sourceToPass : photos.photo_2,
+      photo_3: docSourceBackToPass ? sourceToPass : photos.photo_3,
+
       lang_bike: language ? language : profile.lang_bike,
       about_me: values.about_me ? values.about_me : profile.about_me,
+      address: profile.address,
+      gender: profile.gender,
+      birthday: profile.birthday,
+      notifications: profile.notifications,
     };
+
+    console.log('>>> DATA', data);
 
     editProfile(data).then(res => {
       console.log('EDIT >>>>> PROFILE', res);

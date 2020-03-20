@@ -28,6 +28,18 @@ const hideRoute = {
   overflow: 'hidden',
 };
 
+const bulletBtn = {
+  width: 32,
+  height: 32,
+  alignItems: 'center',
+  zIndex: 12,
+  justifyContent: 'center',
+  alignContent: 'center',
+  borderRadius: 32,
+  color: '#fff',
+  backgroundColor: '#67A960',
+};
+
 const bottomHeaderStyle = {
   borderBottomWidth: 1,
   borderBottomColor: 'rgba(0, 0, 0, .1)',
@@ -204,7 +216,10 @@ class RouteScreen extends Component {
 
   hideRoute = () => {
     this.setState(prevState => {
-      return { ...prevState, hideRoute: !prevState.hideRoute };
+      return {
+        ...prevState,
+        hideRoute: !prevState.hideRoute,
+      };
     });
   };
 
@@ -248,7 +263,17 @@ class RouteScreen extends Component {
     const { navigation, currentPosition, start, finish } = this.props;
     const { name, address, location } = navigation.state.params.station;
     const { pointA, pointB } = navigation.state.params;
-    console.log('🐞: RouteScreen -> render -> this.props', this.props);
+
+    const origin = {
+      latitude: pointA.location.latitude,
+      longitude: pointA.location.longitude,
+    };
+    const destination = {
+      latitude: pointB.location.latitude,
+      longitude: pointB.location.longitude,
+    };
+
+    //console.log('🐞: RouteScreen -> render -> this.props', origin);
     return (
       <Layout>
         <MapView
@@ -280,7 +305,7 @@ class RouteScreen extends Component {
         >
           {/* <Polyline coordinates={this.state.coordinates} strokeColor="#000" strokeWidth={3} /> */}
           <Marker
-            coordinate={pointA.location}
+            coordinate={origin}
             //coordinate={myPos}
             // coordinate={currentPosition}
             tracksViewChanges={false}
@@ -289,9 +314,9 @@ class RouteScreen extends Component {
             <StationMarker />
           </Marker>
           <MapViewDirections
-            // origin={currentPosition}
-            origin={pointA.location}
-            destination={pointB.location}
+            waypoints={[]}
+            origin={origin}
+            destination={destination}
             mode={'WALKING'}
             optimizeWaypoints={true}
             apikey={Config.GOOGLE_MAPS_KEY}
@@ -304,11 +329,7 @@ class RouteScreen extends Component {
               });
             }}
           />
-          <Marker
-            coordinate={pointB.location}
-            anchor={{ x: 0.5, y: 0.5 }}
-            tracksViewChanges={false}
-          >
+          <Marker coordinate={destination} anchor={{ x: 0.5, y: 0.5 }} tracksViewChanges={false}>
             <StationMarker color="#4D94FF" />
           </Marker>
         </MapView>
@@ -316,26 +337,20 @@ class RouteScreen extends Component {
           <View style={{ ...bottomContainerStyle }}>
             <View
               style={{
-                marginTop: -30,
+                marginTop: 0,
                 alignItems: 'center',
                 textAlign: 'center',
               }}
             >
               <TouchableOpacity onPress={() => this.hideRoute()}>
                 <View
-                  style={{
-                    width: 32,
-                    height: 32,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    alignContent: 'center',
-                    borderRadius: 32,
-                    color: '#fff',
-                    backgroundColor: '#67A960',
-                    transform: !this.state.hideRoute
-                      ? [{ rotate: '0deg' }]
-                      : [{ rotate: '180deg' }],
-                  }}
+                  key={this.state.hideRoute} // <- fix for transform
+                  style={[
+                    bulletBtn,
+                    {
+                      transform: [{ rotate: !this.state.hideRoute ? '0deg' : '180deg' }],
+                    },
+                  ]}
                 >
                   <ArrowDown color="#fff" style={{ top: -2 }} />
                 </View>

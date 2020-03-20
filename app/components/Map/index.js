@@ -16,7 +16,7 @@ const init_region = {
   latitude: 51.158559,
   longitude: 71.43244,
   latitudeDelta: 0.05,
-  longitudeDelta: 0.05
+  longitudeDelta: 0.05,
 };
 const anchor = [0.5, 0.5];
 
@@ -30,8 +30,8 @@ class MapComponent extends Component {
       // latitude: 51.158559,
       // longitude: 71.432440
       region: init_region,
-      coords: null,
-      marginBottom: 1
+      coords: [],
+      marginBottom: 1,
     };
   }
 
@@ -45,16 +45,16 @@ class MapComponent extends Component {
           anchor={{ x: 0.5, y: 0.5 }}
           coordinate={{
             latitude: marker.geometry.coordinates[1],
-            longitude: marker.geometry.coordinates[0]
+            longitude: marker.geometry.coordinates[0],
           }}
           tracksViewChanges={false}
           onPress={() => {
             this.mapRef.animateCamera({
               center: {
                 latitude: marker.geometry.coordinates[1],
-                longitude: marker.geometry.coordinates[0]
+                longitude: marker.geometry.coordinates[0],
               },
-              zoom: 16
+              zoom: 16,
             });
           }}
         >
@@ -68,14 +68,14 @@ class MapComponent extends Component {
           anchor={{ x: 0.5, y: 0.5 }}
           coordinate={{
             latitude: marker.geometry.coordinates[1],
-            longitude: marker.geometry.coordinates[0]
+            longitude: marker.geometry.coordinates[0],
           }}
           tracksViewChanges={false}
           onPress={() => {
             if (!marker.road) {
               return navigation.navigate('Station', {
                 id: marker.origin_id,
-                token: this.props.token
+                token: this.props.token,
               });
             } else {
               return this.handleRoadToggle(marker.origin_id);
@@ -114,7 +114,7 @@ class MapComponent extends Component {
           geometry: item.geometry,
           road: item.road || false, // указываем что это велодорожка
           roadDisplay: false, // отображать маршрут или нет
-          coordinates: item.coordinates || false // координаты велодорожки
+          coordinates: item.coordinates || false, // координаты велодорожки
         }));
 
       this.setState({ coords });
@@ -136,7 +136,6 @@ class MapComponent extends Component {
     // if (!stations) return <View><Text>loading...</Text></View>
 
     const cluster = getCluster(coords, region);
-
     return (
       <View style={{ paddingTop: this.state.marginBottom }}>
         <MapView
@@ -189,5 +188,5 @@ class MapComponent extends Component {
 }
 
 export default connect(({ themeChanger }) => ({
-  mainColor: themeChanger.main_color
+  mainColor: themeChanger.main_color,
 }))(MapComponent);
