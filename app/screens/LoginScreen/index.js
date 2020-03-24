@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { reduxForm, Field } from 'redux-form';
-
+import NetInfo from '@react-native-community/netinfo';
 import { baseStyles } from '../../styles';
 import { QBikeLogo } from '../../components/svg';
 import { FormInput, Button, ButtonInline } from '../../components/ui';
@@ -30,6 +30,7 @@ class LoginScreen extends Component {
     this.state = {
       logined: false,
       fail: true,
+      isConnected: false,
     };
   }
 
@@ -48,9 +49,21 @@ class LoginScreen extends Component {
     }
   };
 
-  // async componentDidMount() {
-  //   const token = await AsyncStorage.getItem('user_token');
-  // }
+  handleConnectivityChange = connection => {
+    //console.log('Connection? ', connection.isConnected);
+    this.setState({ isConnected: connection.isConnected });
+  };
+
+  componentDidMount() {
+    this.netinfoUnsubscribe = NetInfo.addEventListener(this.handleConnectivityChange);
+  }
+
+  componentWillUnmount() {
+    if (this.netinfoUnsubscribe) {
+      this.netinfoUnsubscribe();
+      this.netinfoUnsubscribe = null;
+    }
+  }
 
   componentDidUpdate(prevProps, prevState) {
     const {
@@ -100,11 +113,17 @@ class LoginScreen extends Component {
               passwordInput
               inlineBtnOnPress={() => navigation.navigate('ForgetPassword')}
             />
+            {!this.state.isConnected && (
+              <Text style={{ textAlign: 'center', marginTop: 20, color: 'red' }}>
+                Подключите интернет соединение
+              </Text>
+            )}
             <Button
               title="Войти"
               style={{ marginTop: 30 }}
               loading={logining_in}
               onPress={handleSubmit(this.submit)}
+              disabled={!this.state.isConnected}
               // onPress={this.submit}
             />
             <ButtonInline

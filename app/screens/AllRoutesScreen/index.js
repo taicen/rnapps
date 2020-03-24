@@ -8,8 +8,8 @@ import {
   Animated,
   StyleSheet,
 } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-
+//import AsyncStorage from '@react-native-community/async-storage';
+import { withNavigationFocus } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getAllRoutes } from '../../redux/allRoutes';
@@ -41,9 +41,6 @@ const data = [
   },
 ];
 
-// Get user token (there is the user token with roads data for test)
-let token = '';
-
 class AllRoutesScreen extends Component {
   static navigationOptions = {
     headerShown: false,
@@ -64,7 +61,8 @@ class AllRoutesScreen extends Component {
   }
 
   _handleLoadMore = () => {
-    console.log(token);
+    const { getAllRoutes, token } = this.props;
+
     if (this.state.isScrolling) {
       this.setState(
         {
@@ -73,7 +71,7 @@ class AllRoutesScreen extends Component {
           isScrolling: false,
         },
         () => {
-          this.props.getAllRoutes({
+          getAllRoutes({
             token: token,
             data_sort: this.state.filterSortingValue,
             limit: this.state.dataLimit,
@@ -84,15 +82,9 @@ class AllRoutesScreen extends Component {
     }
   };
 
-  async componentDidMount() {
-    const { getAllRoutes, isLoaded } = this.props;
+  _getAllRoutes = () => {
+    const { getAllRoutes, token } = this.props;
     const { filterSortingValue } = this.state;
-
-    await AsyncStorage.getItem('user_token').then(tkn => {
-      token = tkn;
-    });
-    console.log(token);
-
     const dataToSend = {
       token: token,
       data_sort: filterSortingValue,
@@ -101,14 +93,23 @@ class AllRoutesScreen extends Component {
       offset: 0,
     };
     getAllRoutes({ ...dataToSend });
+  };
+
+  componentDidMount() {
+    const { isLoaded } = this.props;
+
+    this._getAllRoutes();
     if (!isLoaded) {
       this.setState({ initPage: false });
     }
-
     // this.laoderRotate();
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (prevProps.isFocused !== this.props.isFocused) {
+      this.props.isFocused && this._getAllRoutes();
+    }
+
     if (prevProps.isLoaded !== this.props.isLoaded) {
       this.setState({
         mainData: this.props.allRoutes ? [...this.props.allRoutes] : [],
@@ -117,15 +118,7 @@ class AllRoutesScreen extends Component {
     }
     // Fetch sorted data when sorting option was changed
     if (prevState.filterSortingValue !== this.state.filterSortingValue) {
-      const { getAllRoutes, isLoaded } = this.props;
-      const dataToSend = {
-        token: token,
-        data_sort: this.state.filterSortingValue,
-        sort: 'DESC',
-        limit: 10,
-        offset: 0,
-      };
-      getAllRoutes({ ...dataToSend });
+      this._getAllRoutes();
       this.setState({ initPage: false });
     }
   }
@@ -280,7 +273,8 @@ class AllRoutesScreen extends Component {
 }
 
 export default connect(
-  ({ allRoutes, themeChanger }) => ({
+  ({ allRoutes, themeChanger, profile }) => ({
+    token: profile.profile_token || null,
     isLoaded: allRoutes.allroutes_loaded,
     allRoutes: allRoutes.allroutes_data.rentals,
     mainColor: themeChanger.main_color,
@@ -292,7 +286,7 @@ export default connect(
       },
       dispatch,
     ),
-)(AllRoutesScreen);
+)(withNavigationFocus(AllRoutesScreen));
 
 const styles = StyleSheet.create({
   filterDropdown: {

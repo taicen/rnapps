@@ -2,22 +2,20 @@ import React, { Component } from 'react';
 import {
   TouchableOpacity,
   TouchableWithoutFeedback,
-  ScrollView,
   ActivityIndicator,
   View,
   Text,
   StyleSheet,
   FlatList,
-  TextInput,
 } from 'react-native';
 // import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 // import { fetchPayments } from '../../../redux/payments';
 // import { profileData } from '../../../redux/profile';
 import moment from 'moment';
-
+import { withNavigationFocus } from 'react-navigation';
 import DropdownMenuLayout from '../../components/layouts/DropdownMenuLayout';
-import { BottomTabs, BottomBlock } from '../../components/blocks';
+//import { BottomTabs, BottomBlock } from '../../components/blocks';
 import PaymentCard from './PaymentCard';
 import { fonts } from '../../constants';
 import { whiteWrapper, shadowBoxStyles, shadowBoxStylesLight } from '../../styles';
@@ -39,30 +37,34 @@ class PaymentScreen extends Component {
     headerShown: false,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeFilter: false,
-      activeField: 'all',
-      page: 1,
-    };
-  }
+  state = {
+    activeFilter: false,
+    activeField: 'all',
+    page: 1,
+  };
 
   _handleLoadMore = () => {
     const {
+      token,
       fetchPayments,
       payments: { payment_list, payment_count },
     } = this.props;
     if (payment_list.length < payment_count) {
       this.setState(
-        (prevState, nextProps) => ({
+        prevState => ({
           page: prevState.page + 1,
         }),
         () => {
-          fetchPayments(this.state.page);
+          fetchPayments({ page: this.state.page, token });
         },
       );
     }
+  };
+
+  _fetchPayments = () => {
+    const { fetchPayments, token } = this.props;
+    const { page } = this.state;
+    fetchPayments({ page, token });
   };
 
   renderFooter = () => {
@@ -75,12 +77,14 @@ class PaymentScreen extends Component {
   };
 
   componentDidMount() {
-    const { fetchPayments, profile_data, profileData } = this.props;
-    const { page } = this.state;
-    fetchPayments(page);
-    // if (!profile_data) {
-    //   profileData();
-    // }
+    const { profile_data, profileData } = this.props;
+    this._fetchPayments();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.isFocused !== this.props.isFocused) {
+      this.props.isFocused && this._fetchPayments();
+    }
   }
 
   renderFilter = () => {
@@ -159,7 +163,7 @@ class PaymentScreen extends Component {
       navigation,
       payments: { payment_list, fetch_payments_in_progress },
     } = this.props;
-    console.log('🐞: PaymentScreen -> render -> this.props', this.props);
+    console.log('🐞: PaymentScreen -> render -> this.props', payment_list);
     const { activeField, activeFilter, page } = this.state;
     let filtered_list;
 
@@ -188,7 +192,7 @@ class PaymentScreen extends Component {
               <FlatList
                 style={{ marginBottom: 100 }}
                 data={filtered_list}
-                keyExtractor={item => item.id.toString()}
+                keyExtractor={item => Date.now() + item.id.toString()}
                 renderItem={({ item }) => (
                   <TouchableOpacity
                     activeOpacity={0.8}
@@ -203,7 +207,7 @@ class PaymentScreen extends Component {
                   >
                     <PaymentCard
                       title={item.title_ru || 'Без названия'}
-                      date={moment(new Date(item.date)).format('DD.MM.YYYY')}
+                      date={moment(new Date(item.date.split(' ')[0])).format('DD.MM.YYYY')}
                       amount={item.amount}
                       id={item.id}
                     />
@@ -227,7 +231,7 @@ class PaymentScreen extends Component {
 //   }),
 //   dispatch => bindActionCreators({ fetchPayments, profileData }, dispatch)
 // )(PaymentScreen);
-export default PaymentScreen;
+export default withNavigationFocus(PaymentScreen);
 
 const styles = StyleSheet.create({
   title: {

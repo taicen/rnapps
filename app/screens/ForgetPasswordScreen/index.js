@@ -73,9 +73,9 @@ class ForgetPasswordScreen extends Component {
       password: values.password,
       password_confirmation: values.password_confirmation,
     };
-    console.log('currentStep', currentStep, !isCodeSaved);
+    //console.log('currentStep', currentStep, !isCodeSaved);
     if (currentStep === 1 && !isCodeSaved) {
-      console.log('here');
+      //console.log('here');
       saveCode(dataToSave);
       sendPassCode(dataToSend);
       this.setState({
@@ -89,7 +89,7 @@ class ForgetPasswordScreen extends Component {
           currentStep: 2,
           codeIsConfirmed: true,
         },
-        console.log('currentStep', currentStep),
+        //console.log('currentStep', currentStep),
       );
     } else {
       newPass(dataToCreate);

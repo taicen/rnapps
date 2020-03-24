@@ -49,12 +49,13 @@ class SettingsScreen extends Component {
       fetchStatusNotifications,
       fetchStatusRoad,
     } = this.props;
-    console.log('SettingsScreen', this.props);
+    //console.log('SettingsScreen', this.props);
 
     const { isModalActive } = this.state;
     const data = [
       {
         title: 'Язык',
+        key: 'language',
         desc: 'Изменить язык приложении',
         switchable: false,
         hasModal: false,
@@ -63,6 +64,7 @@ class SettingsScreen extends Component {
       },
       {
         title: 'Город',
+        key: 'city',
         desc: 'Выбрать доступные города',
         switchable: false,
         hasModal: false,
@@ -71,6 +73,7 @@ class SettingsScreen extends Component {
       },
       {
         title: 'Пуш уведомления',
+        key: 'push',
         desc: 'Включить/выключить пуш уведемления',
         switchable: true,
         hasModal: false,
@@ -82,6 +85,7 @@ class SettingsScreen extends Component {
       },
       {
         title: 'Показывать велодорожку',
+        key: 'veloroad',
         desc: 'Включить/выключить велодорожку',
         switchable: true,
         hasModal: false,
@@ -93,6 +97,7 @@ class SettingsScreen extends Component {
       },
       {
         title: 'Выйти из аккаунта',
+        key: 'logout',
         desc: 'Выйти из аккаунта',
         switchable: false,
         hasModal: true,
@@ -134,6 +139,7 @@ class SettingsScreen extends Component {
                 </View>
               </TouchableOpacity>
             )}
+            keyExtractor={item => item.key.toString()}
           />
         </View>
 

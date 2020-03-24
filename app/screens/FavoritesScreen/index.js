@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import { ScrollView, Text, ActivityIndicator } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -10,6 +9,8 @@ import { fonts } from '../../constants';
 
 import FavoriteCard from './FavoriteCard';
 import { View } from 'react-native-animatable';
+
+import { withNavigationFocus } from 'react-navigation';
 
 // Styles
 const wrap = {
@@ -28,23 +29,13 @@ const title = {
   marginBottom: 25,
 };
 
-// User token
-let token = '';
-AsyncStorage.getItem('user_token').then(tkn => {
-  token = tkn;
-});
-
 class FavoritesScreen extends Component {
   static navigationOptions = {
     headerShown: false,
   };
 
-  _dataToken = {
-    token: token,
-  };
-
   deleteStation = index => {
-    const { getFavorites, deleteFavorite, favorites } = this.props;
+    const { getFavorites, deleteFavorite, favorites, token } = this.props;
     const dataToDelete = {
       token: token,
       station_id: favorites[index].station_id,
@@ -56,18 +47,19 @@ class FavoritesScreen extends Component {
     getFavorites({ ...dataToRefresh });
   };
 
-  reloadFavorites = data => {
-    const { getFavorites } = this.props;
-    getFavorites({ ...data });
+  _getFavorites = () => {
+    const { token, getFavorites } = this.props;
+    getFavorites({ token: token });
   };
 
   componentDidMount() {
-    const { getFavorites } = this.props;
-    const data = {
-      token: token,
-    };
+    this._getFavorites();
+  }
 
-    getFavorites({ ...data });
+  componentDidUpdate(prevProps) {
+    if (prevProps.isFocused !== this.props.isFocused) {
+      this.props.isFocused && this._getFavorites();
+    }
   }
 
   render() {
@@ -86,9 +78,6 @@ class FavoritesScreen extends Component {
             }}
           >
             <Text style={title}>Избранное</Text>
-            <TouchableOpacity onPress={() => this.reloadFavorites(this._dataToken)}>
-              <Text>Обновить</Text>
-            </TouchableOpacity>
           </View>
           <ScrollView>
             {isLoading ? (
@@ -120,7 +109,8 @@ class FavoritesScreen extends Component {
 }
 
 export default connect(
-  ({ favorite }) => ({
+  ({ favorite, profile }) => ({
+    token: profile.profile_token || null,
     favorites: favorite.favorite_stations,
     isLoading: favorite.favorite_stations_in_progress,
   }),
@@ -132,4 +122,4 @@ export default connect(
       },
       dispatch,
     ),
-)(FavoritesScreen);
+)(withNavigationFocus(FavoritesScreen));

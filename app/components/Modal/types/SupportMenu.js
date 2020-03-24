@@ -33,7 +33,10 @@ class SupportMenu extends Component {
     activeSections: [],
     collapsed: true,
     multipleSelect: false,
+    contentMount: false
   };
+
+  _isMounted = false;
 
   toggleExpanded = () => {
     this.setState({ collapsed: !this.state.collapsed });
@@ -47,6 +50,12 @@ class SupportMenu extends Component {
 
   componentDidMount() {
     // this.props.getCallbackForm();
+    this._isMounted = true;
+    this._isMounted && this.setState({ contentMount: true });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   componentDidUpdate(prevProps) {
@@ -56,12 +65,6 @@ class SupportMenu extends Component {
       });
     }
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   this.setState({
-  //     callbackForm: nextProps.callbackForm,
-  //   });
-  // }
 
   renderHeader = (section, _, isActive) => {
     return (
@@ -128,20 +131,6 @@ class SupportMenu extends Component {
       },
     };
 
-    // for (let key in callbackForm) {
-    //   let obj = callbackForm[key]
-    //   let ccc = key
-    //   for( let key2 in obj) {
-    //     let obj2 = obj[key2]
-    //     obj2.type = Object.values(obj2.type)
-    //     // console.log({obj2})
-    //     obj2 = Object.assign(obj2, defaultContent[ccc])
-    //   }
-    //   // console.log(key, obj)
-    //   CONTENT.push(obj.ru)
-    //   // console.log('CONTENT', CONTENT, obj.ru)
-    // }
-
     const content = Object.entries(callbackForm).map(([key, value]) => {
       return {
         ...value['ru'],
@@ -177,7 +166,8 @@ class SupportMenu extends Component {
                 </Text>
               </View>
             </View>
-            <Accordion
+
+            { this.state.contentMount && <Accordion
               activeSections={activeSections}
               sections={content}
               touchableComponent={TouchableOpacity}
@@ -186,7 +176,7 @@ class SupportMenu extends Component {
               renderContent={this.renderContent}
               duration={100}
               onChange={this.setSections}
-            />
+            />}
           </View>
         </View>
       </KeyboardAwareScrollView>

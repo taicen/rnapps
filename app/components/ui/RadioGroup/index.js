@@ -6,7 +6,7 @@ export default class RadioGroup extends Component {
     radioButtons: this.validate(this.props.radioButtons),
     // borderColor: this.props.borderColor,
     bgColor: this.props.bgColor || '#00a5b4',
-    size: this.props.size || 24
+    size: this.props.size || 24,
   };
 
   validate(data) {
@@ -24,7 +24,7 @@ export default class RadioGroup extends Component {
       if (e.selected) {
         if (selected) {
           e.selected = false; // Making "selected: false", if "selected: true" is assigned for more than one button.
-          console.log('Found "selected: true" for more than one button');
+          //console.log('Found "selected: true" for more than one button');
         } else {
           selected = true;
         }
@@ -55,7 +55,7 @@ export default class RadioGroup extends Component {
             flexDirection: 'column',
             width: '100%',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
           }}
         >
           {this.state.radioButtons.map(item => (
@@ -100,8 +100,8 @@ const RadioButton = ({ data, labelStyles, onPress, ...props }) => {
             borderColor: '#d3d3d3',
             width: props.size,
             height: props.size,
-            borderRadius: props.size / 2
-          }
+            borderRadius: props.size / 2,
+          },
         ]}
       >
         {data.selected && (
@@ -110,7 +110,7 @@ const RadioButton = ({ data, labelStyles, onPress, ...props }) => {
               backgroundColor: props.color,
               width: props.size / 2,
               height: props.size / 2,
-              borderRadius: props.size / 2
+              borderRadius: props.size / 2,
             }}
           />
         )}
@@ -122,12 +122,12 @@ const RadioButton = ({ data, labelStyles, onPress, ...props }) => {
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   border: {
     borderWidth: 2,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   item: {
     width: '100%',
@@ -137,13 +137,13 @@ const styles = StyleSheet.create({
     borderBottomColor: '#dfdfdf',
     display: 'flex',
     //flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
     //alignItems: 'center'
   },
   title: {
     fontSize: 14,
     marginBottom: 0,
     color: '#191D30',
-    marginLeft: 10
-  }
+    marginLeft: 10,
+  },
 });

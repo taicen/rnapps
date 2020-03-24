@@ -2,11 +2,11 @@ import 'whatwg-fetch';
 import Config from 'react-native-config';
 import AsyncStorage from '@react-native-community/async-storage';
 
-let token;
-AsyncStorage.getItem('user_token').then(tkn => {
-  token = tkn;
-  //console.log('>>>>>> Notification', token);
-});
+// let token;
+// AsyncStorage.getItem('user_token').then(tkn => {
+//   token = tkn;
+//   //console.log('>>>>>> Notification', token);
+// });
 
 export const types = {
   FETCH_NOTIFICATIONS_REQUEST: 'FETCH_NOTIFICATIONS_REQUEST',
@@ -16,54 +16,54 @@ export const types = {
   GET_NOTIFICATION_SUCCESS: 'GET_NOTIFICATION_SUCCESS',
   GET_NOTIFICATION_FAILURE: 'GET_NOTIFICATION_FAILURE',
   LOAD_MORE_NOTIFICATIONS_REQUEST: 'LOAD_MORE_NOTIFICATIONS_REQUEST',
-  TOGGLE_NOTIFICATION: 'TOGGLE_NOTIFICATION'
+  TOGGLE_NOTIFICATION: 'TOGGLE_NOTIFICATION',
 };
 
 export const fetchNotificationsRequest = () => ({
-  type: types.FETCH_NOTIFICATIONS_REQUEST
+  type: types.FETCH_NOTIFICATIONS_REQUEST,
 });
 
 export const loadMoreNotificationsRequest = () => ({
-  type: types.LOAD_MORE_NOTIFICATIONS_REQUEST
+  type: types.LOAD_MORE_NOTIFICATIONS_REQUEST,
 });
 
 export const fetchNotificationsSuccess = data => ({
   type: types.FETCH_NOTIFICATIONS_SUCCESS,
-  data
+  data,
 });
 
 export const fetchNotificationsFailure = error => ({
   type: types.FETCH_NOTIFICATIONS_FAILURE,
-  data: error
+  data: error,
 });
 
 export const toggleNotification = data => ({
   type: types.TOGGLE_NOTIFICATION,
-  data
+  data,
 });
 
 export const fetchStatusNotifications = data => dispatch => {
   dispatch(toggleNotification(data));
 };
 
-export const fetchNotifications = page => dispatch => {
+export const fetchNotifications = ({ page, token }) => dispatch => {
   if (page === 1) {
     dispatch(fetchNotificationsRequest());
   } else {
     dispatch(loadMoreNotificationsRequest());
   }
   const formData = new FormData();
-  formData.append('tokenApi', 'KCN8J#Jjip_#fjp#(UR)#RI8JFE2@9ufJ#)J)*(GCRMOIuhgUJJEIF#)(FH');
+  formData.append('tokenApi', Config.TOKEN_API_ALM);
   formData.append('token', token);
   formData.append('limit', 20);
   formData.append('offset', page == 1 ? 0 : page * 20 - 20);
   fetch(`${Config.API_URL}/member/notifications`, {
     method: 'POST',
-    body: formData
+    body: formData,
   })
     .then(res => res.json())
     .then(res => {
-      console.log('fetchNotifications', res);
+      //console.log('fetchNotifications', res);
       dispatch(fetchNotificationsSuccess(res));
     })
     .catch(e => {
@@ -73,17 +73,17 @@ export const fetchNotifications = page => dispatch => {
 };
 
 export const getNotificationRequest = () => ({
-  type: types.GET_NOTIFICATION_REQUEST
+  type: types.GET_NOTIFICATION_REQUEST,
 });
 
 export const getNotificationSuccess = data => ({
   type: types.GET_NOTIFICATION_SUCCESS,
-  data
+  data,
 });
 
 export const getNotificationFailure = error => ({
   type: types.GET_NOTIFICATION_FAILURE,
-  data: error
+  data: error,
 });
 
 export const getNotification = id => dispatch => {
@@ -124,7 +124,7 @@ export const initialState = {
   notification: null,
   notification_on: '',
   notification_count: 0,
-  load_more_in_progress: false
+  load_more_in_progress: false,
 };
 
 export default (state = initialState, action) => {
@@ -132,12 +132,12 @@ export default (state = initialState, action) => {
     case types.FETCH_NOTIFICATIONS_REQUEST:
       return {
         ...state,
-        fetch_notifications_in_progress: true
+        fetch_notifications_in_progress: true,
       };
     case types.LOAD_MORE_NOTIFICATIONS_REQUEST:
       return {
         ...state,
-        load_more_in_progress: true
+        load_more_in_progress: true,
       };
     case types.FETCH_NOTIFICATIONS_SUCCESS:
       return {
@@ -148,37 +148,37 @@ export default (state = initialState, action) => {
             ? Object.assign({}, state.notification_list, action.data.notifications)
             : action.data.notifications,
         notification_count: action.data.count,
-        load_more_in_progress: false
+        load_more_in_progress: false,
       };
     case types.FETCH_NOTIFICATIONS_FAILURE:
       return {
         ...state,
         fetch_notifications_in_progress: false,
         fetch_notifications_error: action.data,
-        load_more_in_progress: false
+        load_more_in_progress: false,
       };
     case types.GET_NOTIFICATION_REQUEST:
       return {
         ...state,
-        get_notification_in_progress: true
+        get_notification_in_progress: true,
       };
     case types.GET_NOTIFICATION_SUCCESS:
       return {
         ...state,
         get_notification_in_progress: false,
-        notification: action.data
+        notification: action.data,
       };
     case types.GET_NOTIFICATION_FAILURE:
       return {
         ...state,
         get_notification_in_progress: false,
-        get_notification_error: action.data
+        get_notification_error: action.data,
       };
     case types.TOGGLE_NOTIFICATION:
       AsyncStorage.setItem('notification_on', JSON.stringify(action.data.notice_on));
       return {
         ...state,
-        notification_on: action.data.notice_on
+        notification_on: action.data.notice_on,
       };
     default:
       return state;

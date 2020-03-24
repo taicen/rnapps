@@ -9,21 +9,21 @@ export const types = {
   EDIT_PROFILE_FAILURE: 'EDIT_PROFILE_FAILURE',
   EDIT_PASSWORD_REQUEST: 'EDIT_PASSWORD_REQUEST',
   EDIT_PASSWORD_CONFIRM: 'EDIT_PASSWORD_CONFIRM',
-  EDIT_PASSWORD_FAILURE: 'EDIT_PASSWORD_FAILURE'
+  EDIT_PASSWORD_FAILURE: 'EDIT_PASSWORD_FAILURE',
 };
 
 export const editProfileRequest = () => ({
-  type: types.EDIT_PROFILE_REQUEST
+  type: types.EDIT_PROFILE_REQUEST,
 });
 
 export const editProfileConfirm = data => ({
   type: types.EDIT_PROFILE_CONFIRM,
-  data
+  data,
 });
 
 export const editProfileFailure = error => ({
   type: types.EDIT_PROFILE_FAILURE,
-  data: error
+  data: error,
 });
 
 export const editProfile = data => async dispatch => {
@@ -34,7 +34,7 @@ export const editProfile = data => async dispatch => {
   return fetch(`${Config.API_URL}/member/dataEdit`, {
     method: 'POST',
     headers: { 'Content-Type': 'multipart/form-data' },
-    body: formBuilder({ ...data, token })
+    body: formBuilder({ ...data, token }),
   })
     .then(res => res.json())
     .then(res => {
@@ -52,17 +52,17 @@ export const editProfile = data => async dispatch => {
 // EDIT_PASSWORD_FAILURE: 'EDIT_PASSWORD_FAILURE'
 
 export const editPasswordRequest = () => ({
-  type: types.EDIT_PASSWORD_REQUEST
+  type: types.EDIT_PASSWORD_REQUEST,
 });
 
 export const editPasswordConfirm = data => ({
   type: types.EDIT_PASSWORD_CONFIRM,
-  data
+  data,
 });
 
 export const editPasswordFailure = error => ({
   type: types.EDIT_PASSWORD_FAILURE,
-  data: error
+  data: error,
 });
 
 export const editPassword = data => async dispatch => {
@@ -73,11 +73,11 @@ export const editPassword = data => async dispatch => {
   fetch(`${Config.API_URL}/member/changePassword`, {
     method: 'POST',
     headers: { 'Content-Type': 'multipart/form-data' },
-    body: formBuilder({ ...data, token })
+    body: formBuilder({ ...data, token }),
   })
     .then(res => res.json())
     .then(res => {
-      console.log('Password-change', res);
+      //console.log('Password-change', res);
       dispatch(editPasswordConfirm(res));
     })
     .catch(e => {
@@ -96,7 +96,7 @@ const initialState = {
   language: undefined,
   city: undefined,
   about: undefined,
-  loading: true
+  loading: true,
 };
 
 export default (state = initialState, action) => {
@@ -104,12 +104,12 @@ export default (state = initialState, action) => {
     case types.EDIT_PROFILE_REQUEST:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case types.EDIT_PROFILE_CONFIRM:
       return {
         ...state,
-        loading: false
+        loading: false,
       };
     default:
       return state;

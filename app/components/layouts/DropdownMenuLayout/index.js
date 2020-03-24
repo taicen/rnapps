@@ -14,11 +14,11 @@ const data = [
   { label: 'Поездки', value: 2, screenName: 'AllRoutes' },
   { label: 'Тариф', value: 3, screenName: 'Tariffs' },
   { label: 'Платежи', value: 4, screenName: 'Payment' },
-  { label: 'Избранное', value: 5, screenName: 'Favorites' }
+  { label: 'Избранное', value: 5, screenName: 'Favorites' },
 ];
 
 const mapStateToProps = state => ({
-  ...state.modal
+  ...state.modal,
 });
 
 const defaultStyles = {
@@ -27,7 +27,7 @@ const defaultStyles = {
   width: viewportWidth,
   height: viewportHeight,
   marginTop: Platform.OS === 'ios' ? statusBarHeight : 0,
-  backgroundColor: '#F9F8F7'
+  backgroundColor: '#F9F8F7',
 };
 
 const dropdownStyle = {
@@ -35,7 +35,7 @@ const dropdownStyle = {
   fontFamily: fonts.OpenSansSemibold,
   color: '#54575A',
   textTransform: 'uppercase',
-  letterSpacing: 1
+  letterSpacing: 1,
 };
 
 class DropdownMenuLayout extends Component {
@@ -47,7 +47,7 @@ class DropdownMenuLayout extends Component {
     super(props);
     this.state = {
       active: false,
-      activeIndex: null
+      activeIndex: null,
     };
   }
 
@@ -186,9 +186,9 @@ class DropdownMenuLayout extends Component {
             paddingHorizontal: 10,
             paddingTop: 10,
             height: 50,
-            zIndex: 20
+            zIndex: 20,
           },
-          shadowBoxStyles
+          shadowBoxStyles,
         ]}
       >
         <TouchableOpacity
@@ -204,7 +204,7 @@ class DropdownMenuLayout extends Component {
             alignItems: 'center',
             justifyContent: 'flex-start',
             paddingHorizontal: 20,
-            backgroundColor: '#ffffff'
+            backgroundColor: '#ffffff',
           }}
           onPress={arrowBack && this.backHandler}
         >
@@ -214,7 +214,7 @@ class DropdownMenuLayout extends Component {
               fontSize: 16,
               color: '#54575A',
               marginLeft: arrowBack ? 20 : 10,
-              textTransform: 'uppercase'
+              textTransform: 'uppercase',
             }}
           >
             {screenName}
@@ -226,7 +226,7 @@ class DropdownMenuLayout extends Component {
 
   render() {
     const { children, navigation, screenName, noDropdown, arrowBack, transparent } = this.props;
-    console.log("TCL: DropdownMenuLayout -> render -> screenName", screenName)
+    //console.log("TCL: DropdownMenuLayout -> render -> screenName", screenName)
 
     return (
       <View style={{ ...defaultStyles }}>
@@ -243,7 +243,7 @@ class DropdownMenuLayout extends Component {
             bottom: 90,
             zIndex: 2,
             borderRadius: transparent ? 0 : 15,
-            overflow: 'hidden'
+            overflow: 'hidden',
           }}
         >
           {children}
@@ -254,7 +254,4 @@ class DropdownMenuLayout extends Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  null
-)(DropdownMenuLayout);
+export default connect(mapStateToProps, null)(DropdownMenuLayout);

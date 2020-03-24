@@ -21,11 +21,12 @@ class RegistrationScreen extends Component {
       headerStyle: {
         backgroundColor: '#ffffff',
       },
+      headerTitle: () => {},
       headerLeft: () => (
         <View style={{ marginLeft: 20 }}>
           <ArrowBack
             onPress={() => {
-              console.log(navigation);
+              //console.log(navigation);
               navigation.state.params.currentStep > 1
                 ? navigation.state.params.handlePrevStep()
                 : navigation.goBack();

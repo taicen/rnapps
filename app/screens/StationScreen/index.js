@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Platform,
+  Alert,
 } from 'react-native';
 
 import { fonts } from '../../constants';
@@ -21,25 +22,6 @@ import {
 import { coordsDistMeters } from '../../helpers';
 
 class StationScreen extends Component {
-  // static navigationOptions = ({ navigation }) => ({
-  //   title: "Карта",
-  //   headerTitleStyle: {
-  //     fontFamily: fonts.OpenSansSemiBold,
-  //     fontSize: 16,
-  //     textTransform: "uppercase",
-  //     color: "#54575A",
-  //     letterSpacing: 1
-  //   },
-  //   headerLeft: (
-  //     <TouchableOpacity onPress={() => navigation.goBack()}>
-  //       <ArrowBackIcon />
-  //     </TouchableOpacity>
-  //   ),
-  //   headerLeftContainerStyle: {
-  //     paddingLeft: 10
-  //   }
-  // });
-
   constructor(props) {
     super(props);
     this.state = {
@@ -60,7 +42,10 @@ class StationScreen extends Component {
     // console.log(station);
 
     if (pointB === station) {
-      alert('такая станция добавлена');
+      //alert('такая станция добавлена');
+      Alert.alert('Такая станция добавлена', `Пункт ${station.name.ru} уже существует`, [
+        { text: 'Закрыть' },
+      ]);
     } else {
       this.setState({
         pointA: station,
@@ -83,7 +68,10 @@ class StationScreen extends Component {
     const { pointA } = this.state;
     // console.log(station);
     if (pointA === station) {
-      alert('Выберите другой пункт!');
+      // alert('Выберите другой пункт!');
+      Alert.alert('Выберите другой пункт!', `Пункт ${station.name.ru} уже существует`, [
+        { text: 'Закрыть' },
+      ]);
       navigation.navigate('Main');
     } else {
       this.setState({
@@ -172,7 +160,7 @@ class StationScreen extends Component {
       stations,
     } = this.props;
     const { id, token } = navigation.state.params;
-    console.log('Update', stations);
+    //console.log('Update', stations);
     // if(prevProps.stations.station !== stations.station && stations.station){
     //   this._isMounted = true;
     // }
@@ -225,7 +213,7 @@ class StationScreen extends Component {
       mainColor,
       favorites,
     } = this.props;
-    console.log('🐞: render -> this.props', this.props);
+    //console.log('🐞: render -> this.props', this.props);
     const { isFavorite, pointA, pointB } = this.state;
     const { id } = navigation.state.params;
 

@@ -72,7 +72,7 @@ class EditProfileScreen extends Component {
   }
 
   handleImagePicker = response => {
-    console.log('Response = ', response);
+    //console.log('Response = ', response);
     if (response.didCancel) {
       console.log('User cancelled image picker');
     } else if (response.error) {
@@ -161,10 +161,10 @@ class EditProfileScreen extends Component {
       notifications: profile.notifications,
     };
 
-    console.log('>>> DATA', data);
+    //console.log('>>> DATA', data);
 
     editProfile(data).then(res => {
-      console.log('EDIT >>>>> PROFILE', res);
+      //console.log('EDIT >>>>> PROFILE', res);
       if (res.success) {
         profileData();
       }

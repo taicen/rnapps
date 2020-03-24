@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from "react";
+import React, { Fragment, Component } from 'react';
 import {
   Modal,
   View,
@@ -7,18 +7,18 @@ import {
   Text,
   StyleSheet,
   Platform,
-  findNodeHandle
-} from "react-native";
-import { ArrowRightSmall, PinIcon } from "../../../../svg";
-import { viewportHeight, viewportWidth } from "../../../../../constants";
-import { MSContextConsumer } from "../../../../../context/MainScreenContext";
-import { BlurView } from "@react-native-community/blur";
+  findNodeHandle,
+} from 'react-native';
+import { ArrowRightSmall, PinIcon } from '../../../../svg';
+import { viewportHeight, viewportWidth } from '../../../../../constants';
+import { MSContextConsumer } from '../../../../../context/MainScreenContext';
+import { BlurView } from '@react-native-community/blur';
 
 export class Results extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      viewRefState: null
+      viewRefState: null,
     };
   }
 
@@ -40,16 +40,16 @@ export class Results extends Component {
   componentDidMount() {
     this.setState({ viewRefState: findNodeHandle(this.contentContainer) });
     // this.state.viewRefState
-    console.log(
-      "🐞: Results -> componentDidMount -> this.state.viewRefState",
-      this.state.viewRefState
-    );
+    // console.log(
+    //   "🐞: Results -> componentDidMount -> this.state.viewRefState",
+    //   this.state.viewRefState
+    // );
   }
 
   render() {
     const { navigation, data, token, color } = this.props;
     const { viewRefState } = this.state;
-    console.log("🐞: Results -> render -> viewRefState", this.contentContainer);
+    // console.log("🐞: Results -> render -> viewRefState", this.contentContainer);
 
     if (viewRefState === null && viewRefState === undefined) return null;
     return (
@@ -64,19 +64,19 @@ export class Results extends Component {
               style={[
                 styles.wrapper,
                 {
-                  minHeight: showListState
-                    ? 44
-                    : viewportHeight - (viewportHeight / 100) * 25
-                }
-              ]}>
+                  minHeight: showListState ? 44 : viewportHeight - (viewportHeight / 100) * 25,
+                },
+              ]}
+            >
               <View style={styles.footer}>
                 <TouchableOpacity
                   style={styles.ShowOnMap}
                   onPress={() => {
                     showListHandler(true);
                     showResultsHandler(false);
-                    console.log("touch works");
-                  }}>
+                    // console.log("touch works");
+                  }}
+                >
                   <View style={{ marginRight: 15 }}>
                     <PinIcon color={color} />
                   </View>
@@ -86,7 +86,7 @@ export class Results extends Component {
               <View style={styles.container}>
                 <FlatList
                   style={[
-                    styles.resultList
+                    styles.resultList,
                     // { display: showListState ? "none" : "flex" }
                   ]}
                   data={data}
@@ -95,25 +95,22 @@ export class Results extends Component {
                     <TouchableOpacity
                       style={styles.item}
                       onPress={() =>
-                        navigation.navigate("Station", {
+                        navigation.navigate('Station', {
                           id: item.id,
-                          token: token
+                          token: token,
                         })
-                      }>
+                      }
+                    >
                       <View>
                         <Text style={styles.itemName}>{item.name.ru}</Text>
-                        <Text style={styles.itemAddress}>
-                          {item.address.ru}
-                        </Text>
+                        <Text style={styles.itemAddress}>{item.address.ru}</Text>
                       </View>
                       <ArrowRightSmall />
                     </TouchableOpacity>
                   )}
                   ListEmptyComponent={() => (
                     <View style={styles.notFound}>
-                      <Text style={styles.notFoundText}>
-                        Станция не найдена
-                      </Text>
+                      <Text style={styles.notFoundText}>Станция не найдена</Text>
                     </View>
                   )}
                 />
@@ -136,84 +133,84 @@ export class Results extends Component {
 // --- STYLES --- //
 const styles = StyleSheet.create({
   BlurView: {
-    position: "absolute",
+    position: 'absolute',
     width: viewportWidth,
     height: viewportHeight,
     top: -12,
     bottom: 0,
     left: 0,
-    right: 0
+    right: 0,
   },
   wrapper: {
-    position: "absolute",
+    position: 'absolute',
     top: 60,
     bottom: 0,
     borderRadius: 15,
-    width: "100%",
+    width: '100%',
     // height: "100%",
     marginHorizontal: 10,
-    overflow: "hidden",
+    overflow: 'hidden',
     elevation: 2,
-    zIndex: 20
+    zIndex: 20,
   },
   container: {
-    backgroundColor: "#fff",
-    height: "100%",
-    elevation: 3
+    backgroundColor: '#fff',
+    height: '100%',
+    elevation: 3,
   },
   resultList: {
     // display: "none",
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     // flex: 1,
     // height: "auto",
-    elevation: 4
+    elevation: 4,
   },
   item: {
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderWidth: 1,
-    borderColor: "transparent",
-    borderBottomColor: "#dfdfdf",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center"
+    borderColor: 'transparent',
+    borderBottomColor: '#dfdfdf',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   itemName: {
     fontSize: 14,
-    color: "#191D30"
+    color: '#191D30',
   },
   itemAddress: {
     fontSize: 11,
-    color: "#A5AAAF"
+    color: '#A5AAAF',
   },
   notFound: {
     padding: 30,
-    alignItems: "center"
+    alignItems: 'center',
   },
   notFoundText: {
     fontSize: 24,
-    color: "#aaa"
+    color: '#aaa',
   },
   footer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
-    width: "100%",
+    width: '100%',
     height: 50,
-    backgroundColor: "#fff",
-    alignItems: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
     borderWidth: 1,
-    borderColor: "transparent",
-    borderTopColor: "#eee",
+    borderColor: 'transparent',
+    borderTopColor: '#eee',
     zIndex: 25,
-    elevation: 5
+    elevation: 5,
   },
   ShowOnMap: {
-    width: "100%",
-    height: "100%",
-    flexDirection: "row",
-    alignItems: "center",
+    width: '100%',
+    height: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 20,
     zIndex: 27,
-    elevation: 6
-  }
+    elevation: 6,
+  },
 });

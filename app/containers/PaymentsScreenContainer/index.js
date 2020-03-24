@@ -8,6 +8,7 @@ export default connect(
   ({ payments, profile }) => ({
     payments,
     profile_data: profile.profile_data,
+    token: profile.profile_token || null,
   }),
   dispatch =>
     bindActionCreators(

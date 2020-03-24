@@ -322,7 +322,7 @@ class RouteScreen extends Component {
             apikey={Config.GOOGLE_MAPS_KEY}
             strokeWidth={2}
             onReady={info => {
-              console.log('🐞: RouteScreen -> render -> info', info);
+              //console.log('🐞: RouteScreen -> render -> info', info);
               this.setState({
                 duration: this.amountDistance(info.duration),
                 distance: info.distance,

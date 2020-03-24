@@ -30,7 +30,7 @@ class LogOutModal extends Component {
   logoutHandler = () => {
     const { logout, logoutSuccess, navigation, logoutSuccessNavigation, closeHandler } = this.props;
     const { isToken } = this.state;
-    console.log('🐞: LogOutModal -> logoutHandler -> isToken', isToken);
+    //console.log('🐞: LogOutModal -> logoutHandler -> isToken', isToken);
     const dataToSend = {
       token: isToken,
     };
@@ -46,7 +46,7 @@ class LogOutModal extends Component {
   componentDidUpdate(prevProps) {
     const { closeHandler, logoutSuccessNavigation, logoutSuccess } = this.props;
     if (prevProps.logoutSuccess !== logoutSuccess && logoutSuccess) {
-      console.log('didUpdate is works');
+      //console.log('didUpdate is works');
       logoutSuccessNavigation();
       AsyncStorage.clear();
       closeHandler();
@@ -55,7 +55,7 @@ class LogOutModal extends Component {
 
   render() {
     const { isModalActive, closeHandler } = this.props;
-    console.log('modal props', this.props);
+    //console.log('modal props', this.props);
 
     return (
       <Modal animationType="slide" transparent={true} visible={isModalActive}>

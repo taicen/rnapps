@@ -15,21 +15,21 @@ export const types = {
   GET_STATION_REQUEST: 'GET_STATION_REQUEST',
   GET_STATION_SUCCESS: 'GET_STATION_SUCCESS',
   GET_STATION_FAILURE: 'GET_STATION_FAILURE',
-  TOGGLE_ROAD_STATION: 'TOGGLE_ROAD_STATION'
+  TOGGLE_ROAD_STATION: 'TOGGLE_ROAD_STATION',
 };
 
 export const fetchStationsRequest = () => ({
-  type: types.FETCH_STATIONS_REQUEST
+  type: types.FETCH_STATIONS_REQUEST,
 });
 
 export const fetchStationsSuccess = data => ({
   type: types.FETCH_STATIONS_SUCCESS,
-  data
+  data,
 });
 
 export const fetchStationsFailure = error => ({
   type: types.FETCH_STATIONS_FAILURE,
-  data: error
+  data: error,
 });
 
 export const fetchStations = () => dispatch => {
@@ -37,7 +37,7 @@ export const fetchStations = () => dispatch => {
   fetch('https://velobike.kz/api/stations/get/')
     .then(res => res.json())
     .then(res => {
-      console.log('fetch-stations', res);
+      //console.log('fetch-stations', res);
       dispatch(fetchStationsSuccess(stationListBuilder(res)));
     })
     .catch(e => {
@@ -47,22 +47,22 @@ export const fetchStations = () => dispatch => {
 };
 
 export const getStationRequest = () => ({
-  type: types.GET_STATION_REQUEST
+  type: types.GET_STATION_REQUEST,
 });
 
 export const getStationSuccess = data => ({
   type: types.GET_STATION_SUCCESS,
-  data
+  data,
 });
 
 export const getStationFailure = error => ({
   type: types.GET_STATION_FAILURE,
-  data: error
+  data: error,
 });
 
 export const toggleRoadStation = data => ({
   type: types.TOGGLE_ROAD_STATION,
-  data
+  data,
 });
 
 export const fetchStatusRoad = data => dispatch => {
@@ -74,7 +74,7 @@ export const getStation = id => dispatch => {
   fetch(`https://velobike.kz/api/stations/get/${id}`)
     .then(res => res.json())
     .then(res => {
-      console.log('get-stations', res);
+      //console.log('get-stations', res);
       dispatch(getStationSuccess(stationBuilder(res[0])));
       // stationBuilder(res[0])
     })
@@ -91,7 +91,7 @@ export const initialState = {
   get_station_in_progress: false,
   get_station_error: null,
   station: null,
-  road_on: false
+  road_on: false,
 };
 
 export default (state = initialState, action) => {
@@ -99,42 +99,42 @@ export default (state = initialState, action) => {
     case types.FETCH_STATIONS_REQUEST:
       return {
         ...state,
-        fetch_stations_in_progress: true
+        fetch_stations_in_progress: true,
       };
     case types.FETCH_STATIONS_SUCCESS:
       return {
         ...state,
         fetch_stations_in_progress: false,
-        station_list: action.data
+        station_list: action.data,
       };
     case types.FETCH_STATIONS_FAILURE:
       return {
         ...state,
         fetch_stations_in_progress: false,
-        fetch_stations_error: action.data
+        fetch_stations_error: action.data,
       };
     case types.GET_STATION_REQUEST:
       return {
         ...state,
-        get_station_in_progress: true
+        get_station_in_progress: true,
       };
     case types.GET_STATION_SUCCESS:
       return {
         ...state,
         get_station_in_progress: false,
-        station: action.data
+        station: action.data,
       };
     case types.GET_STATION_FAILURE:
       return {
         ...state,
         get_station_in_progress: false,
-        get_station_error: action.data
+        get_station_error: action.data,
       };
     case types.TOGGLE_ROAD_STATION:
       AsyncStorage.setItem('road_on', JSON.stringify(action.data.road_on));
       return {
         ...state,
-        road_on: action.data.road_on
+        road_on: action.data.road_on,
       };
     default:
       return state;

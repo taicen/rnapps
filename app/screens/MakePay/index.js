@@ -19,7 +19,7 @@ class MakePay extends Component {
   };
 
   togglePay = item => {
-    console.log('ID', item.webView);
+    //console.log('ID', item.webView);
     this.setState({ showModal: true, webView: item.webView });
   };
 
@@ -38,7 +38,7 @@ class MakePay extends Component {
   };
 
   render() {
-    console.log('🐞: MakePay -> props', this.props);
+    //console.log('🐞: MakePay -> props', this.props);
     const { navigation, mainColor } = this.props;
     let dataTabs = [
       {

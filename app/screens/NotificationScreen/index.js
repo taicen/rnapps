@@ -7,65 +7,46 @@ import moment from 'moment';
 import DropdownMenuLayout from '../../components/layouts/DropdownMenuLayout';
 // import { BottomTabs, BottomBlock } from "../../blocks";
 import NotificationCart from './NotificationCard';
-
-const date = [
-  {
-    id: 1,
-    title: 'Новый тариф',
-    date: '12.04.2019',
-    description: 'Поздравляем с приобретением нового тарифного плана «3 месяца пропуска»',
-  },
-  {
-    id: 2,
-    title: 'Пополнение баланса',
-    date: '12.04.2019',
-    description: 'Вы успешно пополнили свой балан на 1200 тенге через...',
-  },
-  {
-    id: 3,
-    title: 'Истекает срок подписки',
-    date: '12.04.2019',
-    description: 'Скоро истечет подписка на тарифныый план',
-  },
-  {
-    id: 4,
-    title: 'Новый тариф',
-    date: '12.04.2019',
-    description: 'Поздравляем с приобретением нового тарифного плана «3 месяца пропуска»',
-  },
-];
-
+import { withNavigationFocus } from 'react-navigation';
 class NotificationScreen extends Component {
   static navigationOptions = {
     headerShown: false,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      page: 1,
-    };
-  }
+  state = {
+    page: 1,
+  };
 
   componentDidMount() {
-    const { fetchNotifications } = this.props;
-    const { page } = this.state;
-    fetchNotifications(page);
+    this._fetchNotifications();
   }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.isFocused !== this.props.isFocused) {
+      this.props.isFocused && this._fetchNotifications();
+    }
+  }
+
+  _fetchNotifications = () => {
+    const { fetchNotifications, token } = this.props;
+    const { page } = this.state;
+    fetchNotifications({ page, token });
+  };
 
   _handleLoadMore = () => {
     const {
+      token,
       fetchNotifications,
       notifications: { notification_list, notification_count, load_more_in_progress },
     } = this.props;
-    console.log(Object.entries(notification_list).length, notification_count);
+
     if (Object.entries(notification_list).length < notification_count && !load_more_in_progress) {
       this.setState(
-        (prevState, nextProps) => ({
+        prevState => ({
           page: prevState.page + 1,
         }),
         () => {
-          fetchNotifications(this.state.page);
+          fetchNotifications({ page: this.state.page, token });
         },
       );
     }
@@ -95,7 +76,7 @@ class NotificationScreen extends Component {
         };
       });
 
-    notifications && console.log(notifications.length);
+    //notifications && console.log(notifications.length);
 
     // const yourDate = new Date()
     // // console.log('yourDate', yourDate)
@@ -123,7 +104,7 @@ class NotificationScreen extends Component {
               >
                 <NotificationCart
                   title={item.title_ru || 'Без названия'}
-                  date={moment(new Date(item.date_create)).format('DD.MM.YYYY')}
+                  date={moment(new Date(item.date_create.split(' ')[0])).format('DD.MM.YYYY')}
                   description={item.description_ru}
                 />
               </TouchableOpacity>
@@ -142,4 +123,6 @@ class NotificationScreen extends Component {
   }
 }
 
-export default connect()(NotificationScreen);
+export default connect(({ profile }) => ({
+  token: profile.profile_token || null,
+}))(withNavigationFocus(NotificationScreen));

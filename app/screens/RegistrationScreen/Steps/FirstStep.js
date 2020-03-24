@@ -48,7 +48,7 @@ class FirstStep extends React.Component {
   handleCheckPhone = e => {
     const { checkPhone } = this.props;
     const normilizePhone = normalizePhone(e.phone_number, true);
-    console.log('🐞: normilizePhone', normilizePhone);
+    //console.log('🐞: normilizePhone', normilizePhone);
     checkPhone(normilizePhone).then(phoneChecked => {
       // console.log('!!!!phoneChecked', phoneChecked);
       this.setState({ phone: normilizePhone, phoneChecked: phoneChecked });
