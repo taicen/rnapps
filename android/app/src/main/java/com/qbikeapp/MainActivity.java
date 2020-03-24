@@ -1,4 +1,4 @@
-package com.fitness_app;
+package com.qbikeapp;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -13,7 +13,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "fitness_app";
+    return "qbikeApp";
   }
 
   @Override

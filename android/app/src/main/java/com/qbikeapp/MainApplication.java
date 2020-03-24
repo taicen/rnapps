@@ -1,4 +1,4 @@
-package com.fitness_app;
+package com.qbikeapp;
 
 import android.app.Application;
 import android.content.Context;

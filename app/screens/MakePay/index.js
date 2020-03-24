@@ -47,7 +47,7 @@ class MakePay extends Component {
         srcImage: (
           <Image
             style={{ tintColor: mainColor }}
-            source={require('fitness_app/assets/images/kaspiBank.png')}
+            source={require('qbike-app/assets/images/kaspiBank.png')}
           />
         ),
         webView: <Kaspi />,
@@ -58,7 +58,7 @@ class MakePay extends Component {
         srcImage: (
           <Image
             style={{ tintColor: mainColor }}
-            source={require('fitness_app/assets/images/qiwiBank.png')}
+            source={require('qbike-app/assets/images/qiwiBank.png')}
           />
         ),
         webView: <CloudPay />,
