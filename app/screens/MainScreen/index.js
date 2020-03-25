@@ -2577,7 +2577,7 @@ class MainScreen extends Component {
               <MapComponent
                 confirmed={confirmed}
                 road_on={road_on}
-                veloroads={veloRoad}
+                veloroads={veloRoads}
                 navigation={navigation}
                 stations={resultList ? resultList : stations && stations.station_list}
                 token={token}

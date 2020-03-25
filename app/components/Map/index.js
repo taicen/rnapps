@@ -28,6 +28,7 @@ class MapComponent extends Component {
       // longitude: 71.432440
       region: init_region,
       coords: [],
+      veloroads: [],
       marginBottom: 1,
     };
   }
@@ -69,17 +70,34 @@ class MapComponent extends Component {
           }}
           tracksViewChanges={false}
           onPress={() => {
-            if (!marker.road) {
-              return navigation.navigate('Station', {
-                id: marker.origin_id,
-                token: this.props.token,
-              });
-            } else {
-              return this.handleRoadToggle(marker.origin_id);
-            }
+            navigation.navigate('Station', {
+              id: marker.origin_id,
+              token: this.props.token,
+            });
           }}
         >
-          {marker.road ? <VeloRoadMarker /> : <StationMarker color={mainColor} />}
+          <StationMarker color={mainColor} />
+        </Marker>
+      </Fragment>
+    );
+  };
+
+  renderVelo = (marker, index) => {
+    const key = index + marker.geometry.coordinates[0];
+    return (
+      <Fragment key={key}>
+        <Marker
+          anchor={{ x: 0.5, y: 0.5 }}
+          coordinate={{
+            latitude: marker.geometry.coordinates[1],
+            longitude: marker.geometry.coordinates[0],
+          }}
+          tracksViewChanges={false}
+          onPress={() => {
+            this.handleRoadToggle(marker.id);
+          }}
+        >
+          <VeloRoadMarker />
         </Marker>
         {marker.roadDisplay && (
           <Polyline coordinates={marker.coordinates} strokeColor="#1C65D1" strokeWidth={3} />
@@ -89,32 +107,33 @@ class MapComponent extends Component {
   };
   // вкл\выкл маршрут велодорожки
   handleRoadToggle = id => {
-    let { coords } = this.state;
-    coords.map(item => {
-      if (item.origin_id === id) {
+    let { veloroads } = this.state;
+    veloroads.map(item => {
+      if (item.id === id) {
         item.roadDisplay = !item.roadDisplay;
       }
       return item;
     });
-    this.setState({ coords });
+    this.setState({ veloroads });
   };
 
   componentDidUpdate(prevProps, prevState) {
     const { stations, veloroads, road_on } = this.props;
     // const { region } = this.state;
     if (prevProps.stations !== stations || prevProps.road_on !== road_on) {
-      const points = stations && road_on ? [...stations, ...veloroads] : stations;
+      // const points = stations && road_on ? [...stations, ...veloroads] : stations;
+      const points = stations;
       const coords =
         stations &&
         points.map(item => ({
           origin_id: item.id,
           geometry: item.geometry,
-          road: item.road || false, // указываем что это велодорожка
-          roadDisplay: false, // отображать маршрут или нет
+          //road: item.road || false, // указываем что это велодорожка
+          //roadDisplay: false, // отображать маршрут или нет
           coordinates: item.coordinates || false, // координаты велодорожки
         }));
 
-      this.setState({ coords });
+      this.setState({ coords, veloroads });
     }
   }
 
@@ -123,13 +142,14 @@ class MapComponent extends Component {
   }
 
   render() {
-    const { region, coords } = this.state;
+    const { region, coords, veloroads } = this.state;
     const { stations, navigation, children, propRegion, mainColor, confirmed } = this.props;
 
     if (!stations || !confirmed) return null;
     // if (!stations) return <View><Text>loading...</Text></View>
 
     const cluster = getCluster(coords, region);
+
     return (
       <View style={{ paddingTop: this.state.marginBottom }}>
         <MapView
@@ -150,9 +170,14 @@ class MapComponent extends Component {
             this.mapRef = ref;
           }}
         >
-          {children
-            ? children
-            : cluster.markers.map((marker, index) => this.renderMarker(marker, index))}
+          {children ? (
+            children
+          ) : (
+            <Fragment>
+              {cluster.markers.map((marker, index) => this.renderMarker(marker, index))}
+              {veloroads.map((marker, index) => this.renderVelo(marker, index))}
+            </Fragment>
+          )}
         </MapView>
       </View>
     );
