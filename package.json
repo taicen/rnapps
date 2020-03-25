@@ -39,6 +39,7 @@
     "react-native-svg": "11.0.1",
     "react-native-text-input-mask": "2.0.0",
     "react-native-webview": "^8.1.2",
+    "react-native-xml2js": "^1.0.3",
     "react-navigation": "4.1.1",
     "react-navigation-stack": "2.1.1",
     "react-navigation-tabs": "2.8.2",
