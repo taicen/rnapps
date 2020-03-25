@@ -1,14 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import {
-  Modal,
-  View,
-  FlatList,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  Platform,
-  findNodeHandle,
-} from 'react-native';
+import { View, FlatList, TouchableOpacity, Text, StyleSheet, findNodeHandle } from 'react-native';
 import { ArrowRightSmall, PinIcon } from '../../../../svg';
 import { viewportHeight, viewportWidth } from '../../../../../constants';
 import { MSContextConsumer } from '../../../../../context/MainScreenContext';

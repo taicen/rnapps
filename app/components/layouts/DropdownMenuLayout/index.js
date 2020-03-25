@@ -6,7 +6,7 @@ import ModalComponent from '../../Modal';
 
 import { shadowBoxStyles } from '../../../styles';
 import { fonts, viewportHeight, viewportWidth, statusBarHeight } from '../../../constants';
-import { ArrowDown, ArrowBackSmall } from '../../svg';
+import { ArrowBackSmall } from '../../svg';
 
 const data = [
   { label: 'Профиль', value: 0, screenName: 'Profile' },
@@ -65,114 +65,6 @@ class DropdownMenuLayout extends Component {
     const { navigation } = this.props;
     navigation.goBack();
   };
-
-  // renderDropDown = navigation => {
-  //   const { active } = this.state;
-
-  //   let activeScreen;
-  //   let activeScreenName = '';
-  //   let dropdownData;
-
-  //   // navigation.state.params.parent
-  //   console.log('🐞: DropdownMenuLayout -> navigation.state.params.parent', navigation.state);
-
-  //   if (navigation.state && navigation.state.params.key) {
-  //     activeScreen = data.find(x => {
-  //       console.log('🐞: DropdownMenuLayout -> x', x);
-  //       return x.screenName === navigation.state.key;
-  //     });
-  //     console.log('🐞: DropdownMenuLayout -> if true -> activeScreen', activeScreen);
-  //     dropdownData = data.filter(item => item.screenName !== navigation.state.routeName);
-  //     console.log('🐞: DropdownMenuLayout -> if true -> dropdownData', dropdownData);
-  //   } else {
-  //     activeScreen = data.find(x => x.screenName === navigation.state.routeName);
-  //     console.log('🐞: DropdownMenuLayout -> if false -> activeScreen', activeScreen);
-  //     dropdownData = data.filter(item => item.screenName !== navigation.state.routeName);
-  //     console.log('🐞: DropdownMenuLayout -> if false -> dropdownData', dropdownData);
-  //   }
-  //   activeScreenName = activeScreen && activeScreen.label;
-
-  //   return (
-  //     <View
-  //       style={[
-  //         {
-  //           width: '100%',
-  //           position: 'relative',
-  //           paddingHorizontal: 10,
-  //           paddingTop: 10,
-  //           height: active ? '100%' : 50,
-  //           zIndex: 20
-  //         },
-  //         shadowBoxStyles
-  //       ]}
-  //     >
-  //       <TouchableOpacity
-  //         activeOpacity={1}
-  //         style={{
-  //           width: '100%',
-  //           height: 50,
-  //           borderTopLeftRadius: 25,
-  //           borderTopRightRadius: 25,
-  //           borderBottomLeftRadius: !active ? 5 : 0,
-  //           borderBottomRightRadius: !active ? 5 : 0,
-  //           display: 'flex',
-  //           flexDirection: 'row',
-  //           alignItems: 'center',
-  //           justifyContent: 'space-between',
-  //           paddingHorizontal: 20,
-  //           backgroundColor: '#ffffff'
-  //         }}
-  //         onPress={() => {
-  //           this.setState(state => ({ active: !state.active }));
-  //         }}
-  //       >
-  //         <Text style={dropdownStyle}>{activeScreenName}</Text>
-  //         <ArrowDown />
-  //       </TouchableOpacity>
-  //       {active && (
-  //         <View
-  //           style={{
-  //             position: 'relative',
-  //             width: '100%',
-  //             display: 'flex',
-  //             flexDirection: 'column',
-  //             backgroundColor: '#ffffff',
-  //             paddingBottom: 10,
-  //             borderBottomLeftRadius: 20,
-  //             borderBottomRightRadius: 20,
-  //             zIndex: 21
-  //           }}
-  //         >
-  //           {dropdownData.map(item => (
-  //             <TouchableOpacity
-  //               // key={item.screenName}
-  //               style={{
-  //                 width: '100%',
-  //                 position: 'relative',
-  //                 paddingHorizontal: 20,
-  //                 paddingTop: 8,
-  //                 paddingBottom: 12,
-  //                 // paddingVertical: 10,
-  //                 zIndex: 22
-  //               }}
-  //               onPress={() => {
-  //                 navigation.navigate(item.screenName);
-  //                 this.setState({
-  //                   // activeScreen: item.screenName,
-  //                   active: false
-  //                 });
-
-  //                 // this.setState({ active: false }, () => navigation.navigate(item.screenName));
-  //               }}
-  //             >
-  //               <Text style={dropdownStyle}>{item.label}</Text>
-  //             </TouchableOpacity>
-  //           ))}
-  //         </View>
-  //       )}
-  //     </View>
-  //   );
-  // };
 
   // Плажка с названием скрина, который приходит с пропса - screenName и стрелкой назад если пропс - arrowBack = true (прим. скрин настроек или редактирование профиля)
   renderSingle = (navigation, screenName, arrowBack) => {

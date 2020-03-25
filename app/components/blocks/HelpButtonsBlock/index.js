@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
 import { LocationIcon, SupportIcon } from '../../svg';
 
@@ -16,16 +16,16 @@ const mapDispatchToProps = (dispatch, store) => ({
   hideModal: () => dispatch(hideModal()),
   showModal: (modalProps, modalType) => {
     dispatch(showModal({ modalProps, modalType }));
-  }
+  },
 });
 
 const mapStateToProps = state => ({
-  mainColor: state.themeChanger.main_color
+  mainColor: state.themeChanger.main_color,
 });
 
 class HelpButtonsBlock extends Component {
   state = {
-    geoLocation: false
+    geoLocation: false,
   };
 
   _watchId = '';
@@ -41,9 +41,9 @@ class HelpButtonsBlock extends Component {
       {
         open: true,
         title: 'Техподдержка',
-        closeModal: this.closeModal
+        closeModal: this.closeModal,
       },
-      'help'
+      'help',
     );
   };
 
@@ -53,8 +53,8 @@ class HelpButtonsBlock extends Component {
         store.dispatch(
           setLocation({
             latitude: coords.latitude,
-            longitude: coords.longitude
-          })
+            longitude: coords.longitude,
+          }),
         );
 
         this.setState(
@@ -66,12 +66,12 @@ class HelpButtonsBlock extends Component {
             } else {
               clearWatchPosition(this._watchId);
             }
-          }
+          },
         );
       },
       errors => {
-        alert('Включите геолокацию!');
-      }
+        Alert.alert('Включите геолокацию!', '', [{ text: 'Закрыть' }]);
+      },
     );
   };
 
@@ -90,12 +90,12 @@ class HelpButtonsBlock extends Component {
     const data = [
       {
         icon: <LocationIcon color={geoLocation ? '#FFF' : null} />,
-        bgColor: geoLocation ? mainColor : '#FFF'
+        bgColor: geoLocation ? mainColor : '#FFF',
       },
       {
         icon: <SupportIcon />,
-        bgColor: mainColor
-      }
+        bgColor: mainColor,
+      },
     ];
 
     return (
@@ -109,8 +109,8 @@ class HelpButtonsBlock extends Component {
                 styles.iconContainerStyle,
                 {
                   backgroundColor: item.bgColor,
-                  elevation: 2
-                }
+                  elevation: 2,
+                },
               ]}
               onPress={() => {
                 key === 0 ? this._toggleGeoLocation() : this.openMenuModal();
@@ -128,15 +128,15 @@ class HelpButtonsBlock extends Component {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   iconContainerStyle: {
     width: 45,
     height: 45,
     borderRadius: 50,
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HelpButtonsBlock);

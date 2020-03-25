@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import { View, Text, Alert } from 'react-native';
+//import AsyncStorage from '@react-native-community/async-storage';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { reduxForm, Field } from 'redux-form';
@@ -77,7 +77,7 @@ class LoginScreen extends Component {
       navigation.navigate('Main');
     }
     if (prevProps.auth.logining_error !== logining_error && logining_error) {
-      alert(logining_error_message);
+      Alert.alert(logining_error_message, '', [{ text: 'Закрыть' }]);
     }
   }
 

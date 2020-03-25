@@ -1,22 +1,22 @@
 import React, { Component, Fragment } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, findNodeHandle, Platform } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, findNodeHandle, Platform } from 'react-native';
 import Modal from 'react-native-modal';
 import { connect } from 'react-redux';
 import { BlurView } from '@react-native-community/blur';
 
 import { default as modalTypes } from './types';
 import { RootModalHeader } from './partials';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+//import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { fonts, viewportWidth, viewportHeight } from '../../constants';
 
 const MODAL_TYPES = {
   menu: modalTypes.ModalMenu,
-  help: modalTypes.SupportMenu
+  help: modalTypes.SupportMenu,
 };
 
 const mapStateToProps = state => ({
-  ...state.modal
+  ...state.modal,
 });
 
 class ModalComponent extends Component {
@@ -25,25 +25,17 @@ class ModalComponent extends Component {
 
     this.state = {
       isModalVisible: false,
-      viewRef: null
+      viewRef: null,
     };
   }
 
-  componentDidUpdate(prevProps){
+  componentDidUpdate(prevProps) {
     if (prevProps !== this.props && this.props.modalProps) {
       this.setState({
-        isModalVisible: this.props.modalProps.open
+        isModalVisible: this.props.modalProps.open,
       });
     }
   }
-  
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps !== this.props && nextProps.modalProps) {
-  //     this.setState({
-  //       isModalVisible: nextProps.modalProps.open
-  //     });
-  //   }
-  // }
 
   componentDidMount() {
     this.setState({ viewRef: findNodeHandle(this.blurRef) });
@@ -94,7 +86,7 @@ class ModalComponent extends Component {
                     left: 0,
                     width: '100%',
                     height: '120%',
-                    backgroundColor: '#fff'
+                    backgroundColor: '#fff',
                   }}
                 />
               )}
@@ -113,18 +105,18 @@ const styles = StyleSheet.create({
   modalContainer: {
     flex: 0,
     justifyContent: 'flex-start',
-    paddingTop: 15
+    paddingTop: 15,
   },
   modalHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 13
+    marginBottom: 13,
   },
   modalTitle: {
     fontFamily: fonts.OpenSansSemiBold,
     color: '#54575A',
     fontSize: 16,
-    marginLeft: 12
+    marginLeft: 12,
   },
   absolute: {
     position: 'absolute',
@@ -133,11 +125,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     width: viewportWidth,
-    height: viewportHeight
-  }
+    height: viewportHeight,
+  },
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(ModalComponent);
+export default connect(mapStateToProps, null)(ModalComponent);

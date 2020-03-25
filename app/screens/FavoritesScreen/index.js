@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, ActivityIndicator } from 'react-native';
+import { ScrollView, Text, ActivityIndicator, View } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -8,7 +8,6 @@ import DropdownMenuLayout from '../../components/layouts/DropdownMenuLayout';
 import { fonts } from '../../constants';
 
 import FavoriteCard from './FavoriteCard';
-import { View } from 'react-native-animatable';
 
 import { withNavigationFocus } from 'react-navigation';
 

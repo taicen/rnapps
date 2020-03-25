@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 // import { View, Text } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
-//import OneSignal from 'react-native-onesignal';
+import OneSignal from 'react-native-onesignal';
 import { MSContextProvider, MSContextConsumer } from '../../context/MainScreenContext';
 
 import Layout from '../../components/layouts/Layout';
@@ -38,31 +38,18 @@ class MainScreen extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   const { fetchStations, getCallbackForm } = this.props;
-
-  //   fetchStations();
-  //   getCallbackForm();
-
-  // OneSignal.init('a610fa20-489b-4e40-9292-dd5db0d9559f');
-
-  // OneSignal.addEventListener('received', this.onReceived);
-  // OneSignal.addEventListener('opened', this.onOpened);
-  // OneSignal.addEventListener('ids', this.onIds);
-  // }
-
   componentWillUnmount() {
-    // OneSignal.removeEventListener('received', this.onReceived);
-    // OneSignal.removeEventListener('opened', this.onOpened);
-    // OneSignal.removeEventListener('ids', this.onIds);
+    OneSignal.removeEventListener('received', this.onReceived);
+    OneSignal.removeEventListener('opened', this.onOpened);
+    OneSignal.removeEventListener('ids', this.onIds);
   }
 
   componentDidUpdate(prevProps, prevState) {
     const { notice_on } = this.props;
 
-    // if (prevProps.notice_on !== notice_on) {
-    //   OneSignal.setSubscription(notice_on);
-    // }
+    if (prevProps.notice_on !== notice_on) {
+      OneSignal.setSubscription(notice_on);
+    }
   }
 
   async componentDidMount() {
@@ -78,11 +65,11 @@ class MainScreen extends Component {
     fetchStations();
     getCallbackForm();
 
-    // OneSignal.init('a610fa20-489b-4e40-9292-dd5db0d9559f');
+    OneSignal.init('a610fa20-489b-4e40-9292-dd5db0d9559f');
 
-    // OneSignal.addEventListener('received', this.onReceived);
-    // OneSignal.addEventListener('opened', this.onOpened);
-    // OneSignal.addEventListener('ids', this.onIds);
+    OneSignal.addEventListener('received', this.onReceived);
+    OneSignal.addEventListener('opened', this.onOpened);
+    OneSignal.addEventListener('ids', this.onIds);
 
     if (mainColor === '') {
       let setMainColor = '';

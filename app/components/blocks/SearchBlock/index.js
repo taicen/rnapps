@@ -1,13 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  Animated,
-  Platform
-} from 'react-native';
+import { View, StyleSheet, TextInput, TouchableOpacity, Animated } from 'react-native';
 import { SearchGeoIcon, SearchLoupeIcon, SearchCloseIcon } from '../../svg';
 import { Results } from './partials/Results';
 import { shadowBoxStyles } from '../../../styles';
@@ -20,14 +12,14 @@ class SearchBlock extends Component {
     this.animatedValue = new Animated.Value(0);
     this.state = {
       dataToSearch: '',
-      isFocused: false
+      isFocused: false,
     };
   }
 
   handleViewWidth = () => {
     Animated.timing(this.animatedValue, {
       toValue: 1,
-      duration: 500
+      duration: 500,
     }).start(() => {
       this.setState({ isFocused: true });
     });
@@ -37,7 +29,7 @@ class SearchBlock extends Component {
     this.animatedValue.setValue(1);
     Animated.timing(this.animatedValue, {
       toValue: 0,
-      duration: 500
+      duration: 500,
     }).start(() => {
       this.setState({ dataToSearch: '', isFocused: false });
     });
@@ -51,7 +43,7 @@ class SearchBlock extends Component {
           data.filter(
             item =>
               item.address.ru.toUpperCase().indexOf(this.state.dataToSearch.toUpperCase()) > -1 ||
-              item.name.ru.toUpperCase().indexOf(this.state.dataToSearch.toUpperCase()) > -1
+              item.name.ru.toUpperCase().indexOf(this.state.dataToSearch.toUpperCase()) > -1,
           )
         : null;
 
@@ -69,10 +61,10 @@ class SearchBlock extends Component {
                   width: this.state.isFocused
                     ? this.animatedValue.interpolate({
                         inputRange: [0, 1],
-                        outputRange: ['20%', '100%']
+                        outputRange: ['20%', '100%'],
                       })
-                    : '20%'
-                }
+                    : '20%',
+                },
               ]}
             >
               <View style={styles.GeoIcon}>
@@ -127,14 +119,14 @@ const styles = StyleSheet.create({
     minWidth: 150,
     height: 44,
     elevation: 2,
-    zIndex: 5
+    zIndex: 5,
   },
   GeoIcon: {
     position: 'absolute',
     top: 14,
     left: 15,
     zIndex: 10,
-    elevation: 3
+    elevation: 3,
   },
   input: {
     width: '100%',
@@ -145,20 +137,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 25,
     elevation: 2,
-    ...shadowBoxStyles
+    ...shadowBoxStyles,
   },
   LoupeIcon: {
     position: 'absolute',
     top: 11.5,
     right: 15,
-    elevation: 4
+    elevation: 4,
   },
   CloseIcon: {
     position: 'absolute',
     top: 6,
     right: 15,
-    elevation: 5
-  }
+    elevation: 5,
+  },
 });
 
 export default SearchBlock;

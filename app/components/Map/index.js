@@ -1,14 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { View } from 'react-native';
-// import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux';
 import MapView, { PROVIDER_GOOGLE, Marker, Polyline } from 'react-native-maps';
-// import MapViewDirections from 'react-native-maps-directions';
 
 import { blocksContainerStyles } from '../../styles';
 import { StationMarker, VeloRoadMarker } from '../svg';
 import { getCluster, coordsDistMeters } from '../../helpers';
-// import Config from 'react-native-config';
 
 import ClusterMarker from './partials/ClusterMarker';
 
@@ -119,9 +116,6 @@ class MapComponent extends Component {
 
       this.setState({ coords });
     }
-    // if (prevState.region !== region) {
-    //     console.log('region', region)
-    // }
   }
 
   componentDidMount() {
@@ -150,34 +144,12 @@ class MapComponent extends Component {
           zoomEnabled
           minZoomLevel={10}
           onRegionChangeComplete={reg => {
-            // const diff = coordsDistMeters(
-            //   reg.latitude,
-            //   reg.longitude,
-            //   region.latitude,
-            //   region.longitude
-            // );
-            // console.log("diff", diff);
-            // console.log("reg", reg);
             this.setState({ region: reg });
           }}
           ref={ref => {
             this.mapRef = ref;
           }}
         >
-          {/* <MapViewDirections
-          apikey={Config.GOOGLE_MAPS_KEY}
-          origin={{
-            latitude: stations[5].coordinates[1],
-            longitude: stations[5].coordinates[0]
-          }}
-          destination={{
-            latitude: stations[30].coordinates[1],
-            longitude: stations[30].coordinates[0]
-          }}
-          mode="DRIVING"
-          strokeWidth={4}
-          strokeColor={mainColor}
-        /> */}
           {children
             ? children
             : cluster.markers.map((marker, index) => this.renderMarker(marker, index))}

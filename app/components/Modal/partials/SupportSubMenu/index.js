@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { Field, reduxForm, reset } from 'redux-form';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';

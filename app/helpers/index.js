@@ -1,4 +1,5 @@
 import Supercluster from 'supercluster';
+import { Alert } from 'react-native';
 import Config from 'react-native-config';
 import { setLocation } from '../redux/location';
 
@@ -29,7 +30,7 @@ export const getCurrentPosition = store => {
       );
     },
     errors => {
-      alert('Включите геолокацию!');
+      Alert.alert('Включите геолокацию!', '', [{ text: 'Закрыть' }]);
     },
   );
 };

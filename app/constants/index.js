@@ -1,8 +1,3 @@
-import * as theme from './theme';
-import * as mocks from './mock';
-
-export { theme, mocks };
-
 import { Dimensions } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 

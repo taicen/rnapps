@@ -1,35 +1,23 @@
-import React, { Component, Fragment } from "react";
-import { View, Platform, StyleSheet } from "react-native";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { View, Platform } from 'react-native';
+import { connect } from 'react-redux';
 
-import ModalComponent from "../../Modal";
-import { OverlayBlock } from "../../blocks";
+import ModalComponent from '../../Modal';
+import { OverlayBlock } from '../../blocks';
 
-import {
-  TopBlock,
-  BottomBlock,
-  BottomTabs,
-  CurrentSessionBlock,
-  HelpButtonsBlock
-} from "../../blocks";
-
-import {
-  statusBarHeight,
-  viewportWidth,
-  viewportHeight
-} from "../../../constants";
+import { statusBarHeight, viewportWidth, viewportHeight } from '../../../constants';
 
 const defaultStyles = {
   flex: 1,
-  position: "relative",
+  position: 'relative',
   width: viewportWidth,
   height: viewportHeight,
-  marginTop: Platform.OS === "ios" ? statusBarHeight : 0,
-  marginBottom: 75
+  marginTop: Platform.OS === 'ios' ? statusBarHeight : 0,
+  marginBottom: 75,
 };
 
 const mapStateToProps = state => ({
-  common: state.common
+  common: state.common,
 });
 
 class Layout extends Component {
@@ -48,10 +36,9 @@ class Layout extends Component {
 
   render() {
     const {
-      navigation,
       children,
       propStyles,
-      common: { overlayIsShown, appInProgress, resultMessage }
+      common: { overlayIsShown, appInProgress, resultMessage },
     } = this.props;
 
     const wrappedChildren = this.wrapChildren(children);
@@ -59,15 +46,10 @@ class Layout extends Component {
       <View style={{ ...defaultStyles, ...propStyles }}>
         {wrappedChildren}
         <ModalComponent />
-        {overlayIsShown && (
-          <OverlayBlock isLoading={appInProgress} message={resultMessage} />
-        )}
+        {overlayIsShown && <OverlayBlock isLoading={appInProgress} message={resultMessage} />}
       </View>
     );
   }
 }
 
-export default connect(
-  mapStateToProps,
-  null
-)(Layout);
+export default connect(mapStateToProps, null)(Layout);
